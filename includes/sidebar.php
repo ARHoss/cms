@@ -26,12 +26,14 @@
     <h4>Blog Categories</h4>
     <div class="row">  
         <!-- /.col-lg-6 -->
-        <div class="col-lg-6">
+        <!-- lg-12 expands the display to all the 12 rows -->
+        <div class="col-lg-12">
             <ul class="list-unstyled">
                 
                 <!-- Displaying all the categories in Blog Categories Well -->
                 <?php 
-                    
+                    // Limits search results to 3
+                    // $query = "SELECT * FROM categories LIMIT 3";
                     $query = "SELECT * FROM categories";
                     $select_categories_sidebar = mysqli_query($connection, $query);
             
@@ -47,6 +49,7 @@
             </ul>
         </div>
         <!-- /.col-lg-6 -->
+
     </div>
     <!-- /.row -->
 </div>
@@ -56,9 +59,7 @@
 
 
 <!-- Side Widget Well -->
-<div class="well">
-    <h4>Side Widget Well</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-</div>
+<?php include "widget.php";?>
+
 
 </div>
