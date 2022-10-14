@@ -24,36 +24,36 @@
 <!-- Blog Categories Well -->
 <div class="well">
     <h4>Blog Categories</h4>
-    <div class="row">
-        <div class="col-lg-6">
-            <ul class="list-unstyled">
-                <li><a href="#">Category Name</a>
-                </li>
-                <li><a href="#">Category Name</a>
-                </li>
-                <li><a href="#">Category Name</a>
-                </li>
-                <li><a href="#">Category Name</a>
-                </li>
-            </ul>
-        </div>
+    <div class="row">  
         <!-- /.col-lg-6 -->
         <div class="col-lg-6">
             <ul class="list-unstyled">
-                <li><a href="#">Category Name</a>
-                </li>
-                <li><a href="#">Category Name</a>
-                </li>
-                <li><a href="#">Category Name</a>
-                </li>
-                <li><a href="#">Category Name</a>
-                </li>
+                
+                <!-- Displaying all the categories in Blog Categories Well -->
+                <?php 
+                    
+                    $query = "SELECT * FROM categories";
+                    $select_categories_sidebar = mysqli_query($connection, $query);
+            
+                    while($row = mysqli_fetch_assoc($select_categories_sidebar)){
+                        
+                        $cat_title = $row['cat_title'];
+                        echo "<li><a href='#'>{$cat_title}</a></li>";
+                        
+                    }
+                    
+                                
+                ?>
             </ul>
         </div>
         <!-- /.col-lg-6 -->
     </div>
     <!-- /.row -->
 </div>
+
+
+
+
 
 <!-- Side Widget Well -->
 <div class="well">
