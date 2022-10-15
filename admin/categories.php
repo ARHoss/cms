@@ -19,6 +19,8 @@
                         </h1>
 
                         <!-- Content -->
+
+                        <!-- Add Form -->
                         <div class="col-xs-6">
                             <form action="">
                                 <div class="form-group">
@@ -34,7 +36,22 @@
 
 
                             </form>
+                        </div>
 
+                        <div class="col-xs-6">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Category Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>Baseball Category</td>
+                                    <td>Basketball Category</td>    
+                                </tbody>
+                            </table>
 
 
 
