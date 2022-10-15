@@ -1,6 +1,8 @@
 <!-- Header -->
 <?php include "includes/admin_header.php";?>
 
+
+
     
 
         <!-- Navigation -->
@@ -27,7 +29,7 @@
 
                         <?php   
                         
-                        // Adds data
+                        // Adds data from add category
                         if(isset($_POST['submit'])){
                         
                             // Retreiving data from post
@@ -77,56 +79,22 @@
                             </form>
 
                             <!-- Update data form -->
-                            <form action="categories.php" method="post">
+                            <?php 
+                            
+                            if(isset($_GET['edit'])){
 
-                                <div class="form-group">
-                                    <label for="cat_title">Edit Category</label>
-
-                                    <!-- Query to populate the edit category form placeholder -->
-                                    <?php 
-                                    
-                                        // _Get looking for 'delete' key
-                                        if(isset($_GET['edit'])){
-
-            
-                                    
-                                            // Retreiving data from post
-                                            $cat_id = $_GET['edit'];
-                                            
-                                            $select_categories_id = "SELECT * FROM categories WHERE cat_id= $cat_id";
-                                            $select_categories = mysqli_query($connection, $select_categories_id);
-
-                                            while($row = mysqli_fetch_assoc($select_categories)){
-                                            
-                                            $cat_id = $row['cat_id'];
-                                            $cat_title = $row['cat_title'];
-
-
-
-                                            
-                                    ?>                                           
-                                        <!-- The inpute where the vaulue needs to be passed -->
-                                        <input value=<?php if(isset($cat_title)){echo $cat_title;} ?> class="form-control" type="text" name="cat_title">
-                                        
-                                        
-                                    <?php 
+                                // Retreiving data from GET
+                                $cat_id = $_GET['edit'];
                                 
-                                            }
-                                    
-                                        } 
-                                    
-                                    ?>
-                                    <!-- Query to populate the edit category form placeholder -ends -->
 
+                                include "includes/update_categories.php";  
 
-
-
-                                </div>
-                                <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" name="submit" value="Update Category">
-                                </div>
-
-                            </form>
+                            }
+                            
+                            
+                            
+                            ?>
+                            
 
                         </div>
 
@@ -212,7 +180,7 @@
                         <!-- Content ends-->
 
 
-                        
+                        <!-- Not required -->
                         <!-- <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
