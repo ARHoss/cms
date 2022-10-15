@@ -80,8 +80,47 @@
                             <form action="categories.php" method="post">
 
                                 <div class="form-group">
-                                    <label for="cat_title">Update Category</label>
-                                    <input class="form-control" type="text" name="cat_title">
+                                    <label for="cat_title">Edit Category</label>
+
+                                    <!-- Query to populate the edit category form placeholder -->
+                                    <?php 
+                                    
+                                        // _Get looking for 'delete' key
+                                        if(isset($_GET['edit'])){
+
+            
+                                    
+                                            // Retreiving data from post
+                                            $cat_id = $_GET['edit'];
+                                            
+                                            $select_categories_id = "SELECT * FROM categories WHERE cat_id= $cat_id";
+                                            $select_categories = mysqli_query($connection, $select_categories_id);
+
+                                            while($row = mysqli_fetch_assoc($select_categories)){
+                                            
+                                            $cat_id = $row['cat_id'];
+                                            $cat_title = $row['cat_title'];
+
+
+
+                                            
+                                    ?>                                           
+                                        <!-- The inpute where the vaulue needs to be passed -->
+                                        <input value=<?php if(isset($cat_title)){echo $cat_title;} ?> class="form-control" type="text" name="cat_title">
+                                        
+                                        
+                                    <?php 
+                                
+                                            }
+                                    
+                                        } 
+                                    
+                                    ?>
+                                    <!-- Query to populate the edit category form placeholder -ends->
+
+
+
+
                                 </div>
                                 <div class="form-group">
                                     <input class="btn btn-primary" type="submit" name="submit" value="Update Category">
@@ -121,8 +160,11 @@
                                             echo "<td>{$cat_id}</td>";
                                             echo "<td>{$cat_title}</td>";
 
-                                            // Passing commant to GET - array returned - ([delete]=>$cat_id) 
+                                            // Delete - Passing commant to GET - array returned - ([delete]=>$cat_id) 
                                             echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+
+                                            // Edit - Passing commant to GET - array returned - ([delete]=>$cat_id) 
+                                            echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
                                             
                                             echo "</tr>";
                                         }
