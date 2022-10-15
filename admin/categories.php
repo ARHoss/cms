@@ -116,7 +116,7 @@
                                         } 
                                     
                                     ?>
-                                    <!-- Query to populate the edit category form placeholder -ends->
+                                    <!-- Query to populate the edit category form placeholder -ends -->
 
 
 
