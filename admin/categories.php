@@ -12,20 +12,22 @@
 
                 <!-- Page Heading -->
                 <div class="row">
+
                     <div class="col-lg-12">
+                        
                         <h1 class="page-header">
                             Welcome to Admin
                             <small>Author Name</small>
                         </h1>
 
+                        
                         <!-- Content -->
-
-                        <!-- Add data to database from Form -->
+                        <!-- Add & update data to database from Form -->
                         <div class="col-xs-6">
 
                         <?php   
                         
-                        
+                        // Adds data
                         if(isset($_POST['submit'])){
                         
                             // Retreiving data from post
@@ -51,17 +53,17 @@
                                 }else{
                                     echo "record updated";
                                 }
+
+                                // Refreshes the page after deleteion - fixes the issue for posting after refresh
+                                header("Location: categories.php");
+
                             }
                         }
                         
                         
                         
                         ?>
-                        
-
-
-
-                            
+                            <!-- Adds data form -->
                             <form action="categories.php" method="post">
 
                                 <div class="form-group">
@@ -74,8 +76,21 @@
 
                             </form>
 
+                            <!-- Update data form -->
+                            <form action="categories.php" method="post">
+
+                                <div class="form-group">
+                                    <label for="cat_title">Update Category</label>
+                                    <input class="form-control" type="text" name="cat_title">
+                                </div>
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" name="submit" value="Update Category">
+                                </div>
+
+                            </form>
+
                         </div>
-                        
+
                         <!-- Add data to database from Form ends-->
 
                         <!-- Reading data to table -->
@@ -91,7 +106,7 @@
                                 
     
                                 <tbody>                                    
-                                    <!-- DB Query -->
+                                    <!-- DB Query to read All data to table-->
                                     <?php   
                 
                                         $query = "SELECT * FROM categories";
@@ -105,22 +120,53 @@
                                             echo "<tr>";
                                             echo "<td>{$cat_id}</td>";
                                             echo "<td>{$cat_title}</td>";
+
+                                            // Passing commant to GET - array returned - ([delete]=>$cat_id) 
+                                            echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+                                            
                                             echo "</tr>";
                                         }
                                             
                                     ?>
                                     <!-- DB Query ends--> 
                                 </tbody>
+
+                                <!-- DB Query to Delete Data -->
+                                <?php 
+                                
+                                // _Get looking for 'delete' key
+                                if(isset($_GET['delete'])){
+
+    
+                            
+                                    // Retreiving data from post
+                                    $the_cat_id = $_GET['delete'];
+                                    
+                            
+                            
+                                    $query = "DELETE FROM categories ";
+                                    $query .= "WHERE cat_id = {$the_cat_id} ";
+                                    $delete_query = mysqli_query($connection, $query);
+                                    
+                                    // Checks if the query fails - not printing if works - need to fix
+                                    // if(!$deletes_query){
+                                    //     die("QUERY FAILED" . mysqli_error($connection));
+                                    // }else{
+                                    //     echo "<font color='blue'>".$myvariable."</font>";
+                                    // }
+                                    
+                                    // Refreshes the page after deleteion
+                                    header("Location: categories.php");
+                                    
+      
+                                }
+                                
+                                ?>
+                                <!-- DB Query to Delete Data ends-->
+                                
                                 
                             </table>
                         </div>
-
-
-
-
-
-
-
                         <!-- Content ends-->
 
 
