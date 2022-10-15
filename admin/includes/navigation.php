@@ -99,6 +99,7 @@
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Categories</a>
                     </li>
                     
+                    <!-- class active keeps it selected -->
                     <li class="active">
                         <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Comments</a>
                     </li>
