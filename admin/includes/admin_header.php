@@ -1,8 +1,10 @@
+<?php include_once "../includes/db.php"; ?>
+<?php include_once "functions.php"; ?>
+
 <!-- Need this to buffer our request in the header of the script -->
 <!-- Output buffer -->
 <?php ob_start(); ?>
 
-<?php include_once "../includes/db.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
