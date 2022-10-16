@@ -100,6 +100,17 @@ function deleteCategories(){
 
     }
 
+    function confirm($result){
+
+        // Must for function
+        global $connection;
+
+        if(!$result){
+            die('Query Failed'.mysqli_error($connection));
+        }
+
+    }
+
 
 
 
