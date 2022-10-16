@@ -52,8 +52,8 @@
         // Retreiving data from post
         $the_cat_title = $_POST['cat_title'];
 
+        
 
-                                 
 
                 // insert values
                 $query = "UPDATE categories SET ";
@@ -71,7 +71,7 @@
     }
            
     ?>
-    
+  
     <!-- Queryt to update category title ends-->
     
 </div>
