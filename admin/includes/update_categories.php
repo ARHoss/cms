@@ -9,8 +9,10 @@
     <?php 
     
     
-            // Retreiving data from post
+            // Retreiving data from GET
             $cat_id = $_GET['edit'];
+            
+
 
             
             
@@ -41,7 +43,9 @@
 
     <!-- Queryt to update category title -->
 
-    <?php 
+    <?php
+    
+
     // Updates data
     if(isset($_POST['update_category'])){
     

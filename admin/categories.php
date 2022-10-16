@@ -83,8 +83,7 @@
                             
                             if(isset($_GET['edit'])){
 
-                                // Retreiving data from GET
-                                $cat_id = $_GET['edit'];
+                            
                                 
 
                                 include "includes/update_categories.php";  
