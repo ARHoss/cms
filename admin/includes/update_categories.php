@@ -47,7 +47,7 @@
 
    
     // Updates data - not working will fix the function
-    if(isset($_POST['update_category'])){
+    if(isset($_GET['cat_title'])){
     
         // Retreiving data from post
         $the_cat_title = $_POST['cat_title'];
