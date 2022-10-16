@@ -46,7 +46,7 @@
     <?php
     
 
-    // Updates data
+    // Updates data - not working will fix the function
     if(isset($_POST['update_category'])){
     
         // Retreiving data from post
