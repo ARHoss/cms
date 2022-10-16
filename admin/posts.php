@@ -34,7 +34,7 @@
                             $source = $_GET['source'];
                             
                         }else{
-                            $source='add_posts';
+                            $source='';
                         }
 
                         
