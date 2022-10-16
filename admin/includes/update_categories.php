@@ -1,4 +1,4 @@
-<?php include "print.php";  ?>
+
 
 <form action="categories.php" method="post">
 
@@ -11,6 +11,7 @@
     
             // Retreiving data from post
             $cat_id = $_GET['edit'];
+
             
             
             
@@ -41,13 +42,13 @@
     <!-- Queryt to update category title -->
 
     <?php 
-    
     // Updates data
     if(isset($_POST['update_category'])){
     
         // Retreiving data from post
         $the_cat_title = $_POST['cat_title'];
-        console_print("I am here");
+
+
                                  
 
                 // insert values
