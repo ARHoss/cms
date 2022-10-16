@@ -25,36 +25,51 @@
 
 
                     <!-- Main Content -->
-                    <table class = "table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Author</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Image</th>
-                                <th>Tags</th>
-                                <th>Comments</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
+                    
+                    <!-- View All Posts -->
+                    <?php 
+                    
+                        if(isset($_GET['source'])){
 
-                        <tbody>
-                            <tr>
-                                <td>10</td>
-                                <td>Edwin Diaz</td>
-                                <td>Bootstrap Framework</td>
-                                <td>Bootstrap</td>
-                                <td>Status</td>
-                                <td>Image</td>
-                                <td>Tags</td>
-                                <td>Comments</td>
-                                <td>Date</td>
-                            </tr>
-                        </tbody>
+                            $source = $_GET['source'];
+                            
+                        }else{
+                            $source='';
+                        }
 
-                    </table>
+                        
+                        switch($source){
+
+                            case '34';;
+                            echo "Nice 34";
+                            break;
+
+                            case '100';
+                            echo "Nice 100";
+                            break;
+
+                            case '21';;
+                            echo "Nice 21";
+                            break;
+
+                            default:
+
+                            // View All Posts
+                            include "includes/view_all_posts.php";
+
+                            break;
+
+
+
+                        }
+                    
+                    
+                    
+                    
+                    ?>
+                    <!-- View All Posts ends-->
+
+                    
 
                     <!-- Main Content ends-->
 
