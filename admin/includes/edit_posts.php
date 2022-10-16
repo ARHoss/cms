@@ -29,10 +29,33 @@
         <input value=<?php if(isset($post_title)){echo $post_title;} ?> type="text" class="form-control" name="post_title">
     </div>
 
+    <!-- Populate select field-->
     <div class="form-group">
-        <label for="post_category_id">Post Category Id</label>
-        <input value=<?php if(isset($post_category_id)){echo $post_category_id;} ?> type="text" class="form-control" name="post_category_id">
+           
+            <select name="post_category" id="post_category">
+
+            <?php 
+            
+            $query = "SELECT * FROM categories";
+            $select_categories = mysqli_query($connection, $query);
+
+            while($row = mysqli_fetch_assoc($select_categories)){
+                
+                $cat_id = $row['cat_id'];
+                $cat_title = $row['cat_title'];
+
+            ?>
+
+                <option value="{$cat_id}"><?php echo $cat_title;?>
+                </option>
+            
+            <?php }  ?>
+            
+            </select>
+
+
     </div>
+    <!-- Populate select field Ends-->
 
     <div class="form-group">
         <label for="post_author">Post Author</label>
@@ -45,8 +68,8 @@
     </div>
 
     <div class="form-group">
-        <label for="post_image">Post Image</label>
-        <input type="file" name="image">
+            <img width="100" src="../images/<?php echo $post_image;?>"
+             alt="image">
     </div>
 
     <div class="form-group">
@@ -60,7 +83,7 @@
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="edit_post" value="Edit Post">
     </div>
 
 

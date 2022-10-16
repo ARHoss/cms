@@ -34,7 +34,7 @@
         $create_post_query = mysqli_query($connection, $query);
 
         // Checking query 
-        confirm($create_post_query);
+        confirmQuery($create_post_query);
 
         
     }

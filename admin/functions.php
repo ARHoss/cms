@@ -100,7 +100,7 @@ function deleteCategories(){
 
     }
 
-    function confirm($result){
+    function confirmQuery($result){
 
         // Must for function
         global $connection;
