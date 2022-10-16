@@ -46,7 +46,10 @@
                 echo "<td>{$post_tags}</td>";
                 echo "<td>{$post_comment_count}</td>";
                 echo "<td>{$post_date}</td>";
-                
+
+                //Edit post link
+                echo "<td><a href=posts.php?source=edit_posts&p_id=$post_id>Edit</a></td>";
+
                 //Delete post link
                 echo "<td><a href=posts.php?delete=$post_id>Delete</a></td>";
 
