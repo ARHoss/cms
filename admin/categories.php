@@ -1,4 +1,4 @@
-<!-- Header --->
+<!-- Header -->
 <?php include "includes/admin_header.php";?>
 
 
@@ -21,7 +21,6 @@
                             Welcome to Admin
                             <small>Author Name</small>
                         </h1>
-
                         
                         <!-- Content -->
                         
