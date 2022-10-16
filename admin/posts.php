@@ -34,14 +34,15 @@
                             $source = $_GET['source'];
                             
                         }else{
-                            $source='';
+                            $source='add_posts';
                         }
 
                         
                         switch($source){
 
-                            case '34';;
-                            echo "Nice 34";
+                            // Add Posts
+                            case 'add_posts';;
+                            include "includes/add_posts.php";
                             break;
 
                             case '100';
@@ -52,19 +53,15 @@
                             echo "Nice 21";
                             break;
 
-                            default:
-
                             // View All Posts
+                            default:
                             include "includes/view_all_posts.php";
-
                             break;
 
 
 
                         }
-                    
-                    
-                    
+                     
                     
                     ?>
                     <!-- View All Posts ends-->
