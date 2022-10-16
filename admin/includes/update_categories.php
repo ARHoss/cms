@@ -44,8 +44,8 @@
     <!-- Queryt to update category title -->
 
     <?php
-    
 
+   
     // Updates data - not working will fix the function
     if(isset($_POST['update_category'])){
     
