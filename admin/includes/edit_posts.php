@@ -32,7 +32,7 @@
     <!-- Populate select field-->
     <div class="form-group">
            
-            <select name="post_category" id="post_category">
+            <select name="post_category_id" id="post_category_id">
 
             <?php 
             
@@ -46,13 +46,11 @@
 
             ?>
 
-                <option value="{$cat_id}"><?php echo $cat_title;?>
-                </option>
+                <option value=<?php if(isset($cat_id)){echo $cat_id;} ?>><?php echo $cat_title;?></option>
             
             <?php }  ?>
             
             </select>
-
 
     </div>
     <!-- Populate select field Ends-->
@@ -68,8 +66,8 @@
     </div>
 
     <div class="form-group">
-            <img width="100" src="../images/<?php echo $post_image;?>"
-             alt="image">
+            <img width="100" src="../images/<?php echo $post_image;?>" alt="image">
+            <input type="file" name="image">
     </div>
 
     <div class="form-group">
@@ -82,19 +80,70 @@
         <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?php if(isset($post_content)){echo $post_content;} ?></textarea>
     </div>
 
-    <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="edit_post" value="Edit Post">
-    </div>
-
-
-
-
-    
-
     <?php }  ?>
-    
 
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">
+    </div>  
     
 </form>
+
+<?php 
+
+    if(isset($_POST['update_post'])){
+            
+        // Retrieving Values from form
+        $the_post_id = $_GET['p_id'];
+        // echo $the_post_id;
+        $post_title = $_POST['post_title'];
+        // echo $post_category_id;
+        
+        $post_category_id = $_POST['post_category_id'];
+        // echo $post_category_id;
+        
+        $post_author = $_POST['post_author'];
+        // echo $post_author;
+
+        $post_status = $_POST['post_status'];
+        // echo $post_status;
+        
+        $post_image = $_FILES['image']['name'];
+        $post_image_temp = $_FILES['image']['tmp_name'];
+        
+        
+        $post_tags = $_POST['post_tags'];
+        $post_content = $_POST['post_content'];
+        $post_comment_count = 4;
+        $post_date = date('d-m-y');
+
+        // Function for images
+        // if it does not work provide permsission to the folder to everyone
+        move_uploaded_file($post_image_temp, "../images/$post_image");
+
+
+        // Updated values
+        // $query = "UPDATE users SET ";
+        // $query .= "username = '$username', ";
+        // $query .= "password = '$password' ";
+        // $query .= "WHERE ID = $id";
+
+
+        $query = "UPDATE posts SET post_category_id=$post_category_id, post_title='$post_title', 
+        post_author='$post_author', post_date=now(), post_image='$post_image', post_content='$post_content', post_tags='$post_tags', 
+        post_comment_count=$post_comment_count, post_status='$post_status' ";
+        $query .= "WHERE post_id = $the_post_id";
+
+        $create_update_query = mysqli_query($connection, $query);
+
+        // Checking query 
+        // confirmQuery($create_update_query);
+
+        
+    }
+
+
+
+?>
+
 
 

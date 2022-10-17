@@ -18,8 +18,8 @@
                     <div class="col-lg-12">
                         
                     <h1 class="page-header">
-                            All Posts
-                            <small>All Users</small>
+                            Welcome to admin
+                            <small>Author</small>
                     </h1>
 
 

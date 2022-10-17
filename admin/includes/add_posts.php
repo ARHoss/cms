@@ -22,6 +22,7 @@
         // if it does not work provide permsission to the folder to everyone
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
+
         // insert values
         $query = "INSERT INTO posts(post_category_id, post_title, 
         post_author, post_date, post_image, post_content, post_tags, 
@@ -34,7 +35,7 @@
         $create_post_query = mysqli_query($connection, $query);
 
         // Checking query 
-        confirmQuery($create_post_query);
+        // confirmQuery($create_post_query);
 
         
     }
