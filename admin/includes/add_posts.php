@@ -56,10 +56,36 @@
         <input type="text" class="form-control" name="post_title">
     </div>
 
+    <!-- Populate category select field-->
     <div class="form-group">
+        <label for="category_title">Category</label>
+        <select name="post_category_id" id="post_category_id">
+
+        <?php 
+        
+        $query = "SELECT * FROM categories";
+        $select_categories = mysqli_query($connection, $query);
+
+        while($row = mysqli_fetch_assoc($select_categories)){
+            
+            $cat_id = $row['cat_id'];
+            $cat_title = $row['cat_title'];
+
+        ?>
+
+            <option value=<?php if(isset($cat_id)){echo $cat_id;} ?>><?php echo $cat_title;?></option>
+        
+        <?php }  ?>
+        
+        </select>
+
+   </div>
+   <!-- Populate category select field Ends-->
+
+    <!-- <div class="form-group">
         <label for="post_category_id">Post Category Id</label>
         <input type="text" class="form-control" name="post_category_id">
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label for="post_author">Post Author</label>

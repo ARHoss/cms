@@ -31,7 +31,7 @@
 
     <!-- Populate select field-->
     <div class="form-group">
-           
+            <label for="category_title">Category</label>
             <select name="post_category_id" id="post_category_id">
 
             <?php 
