@@ -67,7 +67,7 @@
 
     <div class="form-group">
             <img width="100" src="../images/<?php echo $post_image;?>" alt="image">
-            <input type="file" name="image">
+            <input type="file" name="post_image">
     </div>
 
     <div class="form-group">
@@ -107,8 +107,8 @@
         $post_status = $_POST['post_status'];
         // echo $post_status;
         
-        $post_image = $_FILES['image']['name'];
-        $post_image_temp = $_FILES['image']['tmp_name'];
+        $post_image = $_FILES['post_image']['name'];
+        $post_image_temp = $_FILES['post_image']['tmp_name'];
         
         
         $post_tags = $_POST['post_tags'];
@@ -118,15 +118,23 @@
 
         // Function for images
         // if it does not work provide permsission to the folder to everyone
+        // Image is transferred from $post_image_temp to $post_image
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
+        // Re-populating the image upload section after image is uploadedv for furhter edit
+        if(empty($post_image)){
 
-        // Updated values
-        // $query = "UPDATE users SET ";
-        // $query .= "username = '$username', ";
-        // $query .= "password = '$password' ";
-        // $query .= "WHERE ID = $id";
 
+        $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+        $select_image = mysqli_query($connection, $query);
+
+            while($row = mysqli_fetch_assoc($select_image)){
+                
+            
+                $post_image = $row['post_image'];
+
+            }
+        }
 
         $query = "UPDATE posts SET post_category_id=$post_category_id, post_title='$post_title', 
         post_author='$post_author', post_date=now(), post_image='$post_image', post_content='$post_content', post_tags='$post_tags', 
@@ -134,6 +142,7 @@
         $query .= "WHERE post_id = $the_post_id";
 
         $create_update_query = mysqli_query($connection, $query);
+
 
         // Checking query 
         // confirmQuery($create_update_query);
