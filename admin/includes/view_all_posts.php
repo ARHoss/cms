@@ -39,7 +39,16 @@
                 echo "<td>{$post_id}</td>";
                 echo "<td>{$post_author}</td>";
                 echo "<td>{$post_title}</td>";
-                echo "<td>{$post_category_id}</td>";
+
+
+                // Populating category title from category table
+                $query = "SELECT * FROM categories WHERE cat_id={$post_category_id}";
+                $select_categories = mysqli_query($connection, $query);
+                while($row = mysqli_fetch_assoc($select_categories)){
+                    $cat_title = $row['cat_title'];
+                echo "<td>{$cat_title}</td>";
+                }
+                
                 echo "<td>{$post_status}</td>";
                 // Showing image
                 echo "<td><img width='100' src='../images/$post_image' alt='image' ></td>";
