@@ -120,18 +120,20 @@
         // if it does not work provide permsission to the folder to everyone
         // Image is transferred from $post_image_temp to $post_image
         move_uploaded_file($post_image_temp, "../images/$post_image");
+        
 
-        // Re-populating the image upload section after image is uploadedv for furhter edit
+        // Re-populating the post_image when an empty image form submitted
         if(empty($post_image)){
 
 
         $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
-        $select_image = mysqli_query($connection, $query);
+        $image_query = mysqli_query($connection, $query);
 
-            while($row = mysqli_fetch_assoc($select_image)){
+            while($row = mysqli_fetch_assoc($image_query)){
                 
             
                 $post_image = $row['post_image'];
+
 
             }
         }
@@ -142,6 +144,11 @@
         $query .= "WHERE post_id = $the_post_id";
 
         $create_update_query = mysqli_query($connection, $query);
+
+        // Refreshes the page after deleteion
+        header("Location: posts.php");
+        
+
 
 
         // Checking query 
