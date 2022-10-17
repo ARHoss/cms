@@ -62,7 +62,7 @@
                 <?php  } ?>
 
                 <!-- Blog Comments -->
-                <?php include "comments.php"; ?>
+                <?php include "post_comments.php"; ?>
                 
 
                 
