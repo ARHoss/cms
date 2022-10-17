@@ -10,6 +10,7 @@
             <th>Date</th>
             <th>Approve</th>
             <th>Unapprove</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
@@ -53,9 +54,6 @@
                 // Approve and Unapprove
                 echo "<td><a href=comments.php?source=edit_comments&c_id=$comment_id>Approve</a></td>";
                 echo "<td><a href=comments.php?source=edit_comments&c_id=$comment_id>Unapprove</a></td>";
-                
-                //Edit post link
-                echo "<td><a href=comments.php?source=edit_comments&c_id=$comment_id>Edit</a></td>";
 
                 //Delete post link
                 echo "<td><a href=comments.php?delete=$comment_id>Delete</a></td>";
