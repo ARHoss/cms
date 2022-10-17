@@ -128,6 +128,7 @@
 
         $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
         $image_query = mysqli_query($connection, $query);
+        
 
             while($row = mysqli_fetch_assoc($image_query)){
                 
