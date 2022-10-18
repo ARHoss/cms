@@ -16,7 +16,7 @@
 
     <tbody>
 
-        <!-- Show All Posts Query -->
+        <!-- Show All Comments Query -->
         <?php   
         
         $query = "SELECT * FROM comments";
@@ -58,7 +58,7 @@
                 echo "<td><a href=comments.php?unapprove=$comment_id>Unapprove</a></td>";
 
                 //Delete post link
-                echo "<td><a href=comments.php?delete_comment=$comment_id>Delete</a></td>";
+                echo "<td><a href=comments.php?delete_comment=$comment_id&p_id=$comment_post_id>Delete</a></td>";
 
                                                                         
                 echo "</tr>";
@@ -78,11 +78,16 @@
 
         // Retreiving data from post
         $the_comment_id = $_GET['delete_comment'];
+        $the_comment_post_id = $_GET['p_id'];
 
         $query = "DELETE FROM comments ";
         $query .= "WHERE comment_id = $the_comment_id";
 
         $delete_comment_query = mysqli_query($connection, $query);
+
+        // Decrease post_comment_count
+        $decrease_comment_query ="UPDATE posts SET post_comment_count = post_comment_count - 1 WHERE post_id = $the_comment_post_id";
+        $decrease_post_comment_count_query = mysqli_query($connection, $decrease_comment_query);
 
         // Refresh page
         header("Location: comments.php");

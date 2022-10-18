@@ -15,7 +15,7 @@
         
         $post_tags = $_POST['post_tags'];
         $post_content = $_POST['post_content'];
-        $post_comment_count = 4;
+        $post_comment_count = 0;
         $post_date = date('d-m-y');
 
         // Function for images

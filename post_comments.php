@@ -1,5 +1,7 @@
                 <!-- Blog Comments -->
 
+                
+                <!-- Add Comment -->
                 <?php 
                 
                 if(isset($_POST['create_comment'])){
@@ -20,14 +22,16 @@
 
                     $create_comment_query = mysqli_query($connection, $query);
 
+                    // Increasing post_comment_count
+                    $increase_comment_query ="UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
+                    $increase_post_comment_count_query = mysqli_query($connection, $increase_comment_query);
+
                     // Refresh page
                     header("Location: post.php?p_id=$the_post_id");
 
                 }
                 
-                
-                
-                
+                  
                 ?>
                 
 
