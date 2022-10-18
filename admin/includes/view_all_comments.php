@@ -58,7 +58,7 @@
                 echo "<td><a href=comments.php?source=edit_comments&c_id=$comment_id>Unapprove</a></td>";
 
                 //Delete post link
-                echo "<td><a href=comments.php?delete=$comment_id>Delete</a></td>";
+                echo "<td><a href=comments.php?delete_comment=$comment_id>Delete</a></td>";
 
                                                                         
                 echo "</tr>";
@@ -70,22 +70,22 @@
 
 </table>
 
-<!-- Deelete Query -->
+<!-- Deelete Comment Query -->
 <?php 
 
-    if(isset($_GET['delete'])){
+    if(isset($_GET['delete_comment'])){
 
 
         // Retreiving data from post
-        $the_post_id = $_GET['delete'];
+        $the_comment_id = $_GET['delete_comment'];
 
-        $query = "DELETE FROM posts ";
-        $query .= "WHERE post_id = $the_post_id";
+        $query = "DELETE FROM comments ";
+        $query .= "WHERE comment_id = $the_comment_id";
 
-        $delete_query = mysqli_query($connection, $query);
+        $delete_comment_query = mysqli_query($connection, $query);
 
         // Refresh page
-        header("Location: posts.php");
+        header("Location: comments.php");
         
 }
 

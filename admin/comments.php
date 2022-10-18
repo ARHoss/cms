@@ -41,7 +41,7 @@
                         switch($source){
 
                             // Add Posts
-                            case 'add_posts';;
+                            case 'delete_posts';;
                             include "includes/add_posts.php";
                             break;
 

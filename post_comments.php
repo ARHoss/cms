@@ -20,6 +20,9 @@
 
                     $create_comment_query = mysqli_query($connection, $query);
 
+                    // Refresh page
+                    header("Location: comments.php");
+
 
                 }
                 
