@@ -94,8 +94,13 @@
 
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
-    </div>
+        <select name="post_status" id="post_status">
+
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+        
+        </select>
+   </div>
 
     <div class="form-group">
         <label for="post_image">Post Image</label>
@@ -113,7 +118,7 @@
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="create_post" value="Add Post">
     </div>
 
 </form>

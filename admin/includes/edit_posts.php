@@ -60,10 +60,28 @@
         <input value=<?php if(isset($post_author)){echo $post_author;} ?> type="text" class="form-control" name="post_author">
     </div>
 
+    <!-- Pupalting post status -->
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <input value=<?php if(isset($post_status)){echo $post_status;} ?> type="text" class="form-control" name="post_status">
-    </div>
+        <select name="post_status" id="post_status">
+
+            <?php 
+                if($post_status == "published"){
+                    echo "<option value='published' selected='selected'>Published</option>";
+                    echo "<option value='draft'>Draft</option>";
+                    
+                }else{
+                    echo "<option value='published'>Published</option>";
+                    echo "<option value='draft' selected='selected'>Draft</option>";
+
+                }
+            
+            ?>
+             
+        </select>
+   </div>
+
+
 
     <div class="form-group">
             <img width="100" src="../images/<?php echo $post_image;?>" alt="image">
