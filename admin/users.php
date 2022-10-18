@@ -41,22 +41,21 @@
                         switch($source){
 
                             // Add Posts
-                            case 'add_comments';;
-                            include "includes/add_comments.php";
+                            case 'delete_posts';;
+                            include "includes/add_posts.php";
                             break;
 
-                            // Add Posts
-                            case 'delete_comments';;
-                            include "includes/delete_comments.php";
+                            case 'edit_userss';
+                            include "includes/edit_users.php";
                             break;
 
-                            case 'edit_comments';
-                            include "includes/edit_comments.php";
+                            case '21';;
+                            echo "Nice 21";
                             break;
 
                             // View All Posts
                             default:
-                            include "includes/view_all_comments.php";
+                            include "includes/view_all_users.php";
                             break;
 
 
