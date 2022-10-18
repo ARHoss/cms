@@ -41,16 +41,16 @@
                         switch($source){
 
                             // Add Posts
-                            case 'delete_posts';;
-                            include "includes/add_posts.php";
+                            case 'add_users';;
+                            include "includes/add_users.php";
                             break;
 
-                            case 'edit_userss';
+                            case 'edit_users';
                             include "includes/edit_users.php";
                             break;
 
-                            case '21';;
-                            echo "Nice 21";
+                            case 'delete_users';
+                            include "includes/delete_users.php";
                             break;
 
                             // View All Posts
