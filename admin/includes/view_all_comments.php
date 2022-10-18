@@ -104,7 +104,7 @@ if(isset($_GET['unapprove'])){
     // Retreiving data from post
     $the_comment_id = $_GET['unapprove'];
 
-    $query = "UPDATE comments SET comment_status ='unapprove' ";
+    $query = "UPDATE comments SET comment_status ='unapproved' ";
     $query .= "WHERE comment_id = $the_comment_id";
 
     $unapprove_comment_query = mysqli_query($connection, $query);
@@ -121,7 +121,7 @@ if(isset($_GET['approve'])){
     // Retreiving data from post
     $the_comment_id = $_GET['approve'];
 
-    $query = "UPDATE comments SET comment_status ='approve' ";
+    $query = "UPDATE comments SET comment_status ='approved' ";
     $query .= "WHERE comment_id = $the_comment_id";
 
     $approve_comment_query = mysqli_query($connection, $query);
