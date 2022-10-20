@@ -7,6 +7,18 @@
 <?php include_once "../includes/db.php"; ?>
 <?php include_once "functions.php"; ?>
 
+<!-- Checking user role and allowing to login -->
+<?php 
+
+    if(isset($_SESSION['user_role'])){
+        
+        if($_SESSION['user_role'] !== "admin"){
+            header("Location: ../index.php");
+
+        }
+    }
+
+?>
 
 
 

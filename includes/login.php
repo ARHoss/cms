@@ -15,6 +15,7 @@
         $username = mysqli_real_escape_string($connection, $username);
         $user_password = mysqli_real_escape_string($connection, $user_password);
 
+        // Retrieving information from DB
         $query = "SELECT * FROM users WHERE username = '{$username}' ";
         $select_user_login_query = mysqli_query($connection, $query);
 
