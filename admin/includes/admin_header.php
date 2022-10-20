@@ -8,15 +8,26 @@
 <?php include_once "functions.php"; ?>
 
 <!-- Checking user role and allowing to login -->
+<!-- Also block users who are not admin and does not have correct credenitials -->
 <?php 
 
-    if(isset($_SESSION['user_role'])){
-        
-        if($_SESSION['user_role'] !== "admin"){
-            header("Location: ../index.php");
+    // Block users who do not have right credentials
+    if(!isset($_SESSION['user_role'])){ // Block users who do not have right credentials
 
+        header("Location: ../index.php");
+    }else if(isset($_SESSION['user_role'])){ // Block users who do not have admin rights
+
+        if($_SESSION['user_role'] == "subscriber"){
+
+            header("Location: ../index.php");
         }
+
     }
+
+    
+        
+
+    
 
 ?>
 
