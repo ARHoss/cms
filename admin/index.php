@@ -17,7 +17,9 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome to Admin
-                            <small>Author Name</small>
+
+                            <!-- Reading session variable -->
+                            <small><?php echo $_SESSION['firstname'];  ?></small>
                         </h1>
                         
                         <!-- <ol class="breadcrumb">
