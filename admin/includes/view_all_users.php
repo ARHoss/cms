@@ -11,6 +11,7 @@
             <th>Date Created</th>
             <th>Change to Admin</th>
             <th>Change to Subscriber</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -48,9 +49,12 @@
                 echo "<td>{$user_role}</td>";
                 echo "<td>{$user_date_created}</td>";
                 
-                // Approve and Unapprove
+                //Change Role
                 echo "<td><a href=users.php?change_to_admin=$user_id>Admin</a></td>";
                 echo "<td><a href=users.php?change_to_sub=$user_id>Subscriber</a></td>";
+
+                //Edit Users
+                echo "<td><a href=users.php?source=edit_users&u_id=$user_id>Edit</a></td>";
 
                 //Delete post link
                 echo "<td><a href=users.php?delete_user=$user_id>Delete</a></td>";
