@@ -23,7 +23,23 @@
 
         while($row=mysqli_fetch_assoc($select_user_login_query)){
 
-            echo $db_id = $row['user_id'];
+            $db_user_id = $row['user_id'];
+            $db_username = $row['username'];
+            $db_user_password = $row['user_password'];
+            $db_user_firsname = $row['user_firstname'];
+            $db_user_lastname = $row['user_lastname'];
+            $db_user_role = $row['user_role'];
+            
+        }
+
+        // login check
+        if($username !== $db_username && $user_password !== $db_user_password){ // if username and password dont match
+            header("Location: ../index.php");
+        }else if ($username == $db_username && $user_password == $db_user_password){ // if username and password matches
+            header("Location: ../admin");
+ 
+        }else{ // anything else
+            header("Location: ../index.php");
         }
 
 
