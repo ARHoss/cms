@@ -20,6 +20,29 @@
 </div>
 <!-- Blog Search Well ends-->
 
+<!-- Login -->
+<div class="well">
+    <h4>Log In</h4>
+    <!-- Login Form -->
+    <form action="includes/login.php" method="post">
+    <div class="form-group">
+        <input name="username" type="text" class="form-control" placeholder="Enter Username">
+    </div>
+    <div class="input-group">
+        <input name="username.password" type="password" class="form-control" placeholder="Enter Password">
+        
+        <!-- Login Button -->
+        <span class="input-group-btn"> 
+
+            <button class="btn btn-primary" name="login" type="submit">Login</button>
+
+        </span>
+    </div>
+    </form> 
+    <!-- /.input-group -->
+</div>
+<!-- Login Ends-->
+
 
 <!-- Blog Categories Well -->
 <div class="well">
