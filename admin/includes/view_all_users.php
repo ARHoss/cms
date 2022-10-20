@@ -9,8 +9,8 @@
             <th>Image</th>
             <th>User Role</th>
             <th>Date Created</th>
-            <th>Approve</th>
-            <th>Unapprove</th>
+            <th>Change to Admin</th>
+            <th>Change to Subscriber</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -49,8 +49,8 @@
                 echo "<td>{$user_date_created}</td>";
                 
                 // Approve and Unapprove
-                echo "<td><a href=users.php?approve_user=$user_id>Approve</a></td>";
-                echo "<td><a href=users.php?unapprove_user=$user_id>Unapprove</a></td>";
+                echo "<td><a href=users.php?change_to_admin=$user_id>Admin</a></td>";
+                echo "<td><a href=users.php?change_to_sub=$user_id>Subscriber</a></td>";
 
                 //Delete post link
                 echo "<td><a href=users.php?delete_user=$user_id>Delete</a></td>";
@@ -93,34 +93,34 @@
 
 <?php 
 
-// Unapprove query 
-if(isset($_GET['unapprove_user'])){
+// change_to_admin query 
+if(isset($_GET['change_to_admin'])){
 
 
     // Retreiving data from post
-    $the_user_id = $_GET['unapprove_user'];
+    $the_user_id = $_GET['change_to_admin'];
 
-    $query = "UPDATE users SET comment_status ='unapproved' ";
-    $query .= "WHERE comment_id = $the_user_id";
+    $query = "UPDATE users SET user_role ='admin' ";
+    $query .= "WHERE user_id = $the_user_id";
 
-    $unapprove_comment_query = mysqli_query($connection, $query);
+    $change_to_admin_query = mysqli_query($connection, $query);
 
     // Refresh page
     header("Location: users.php");
     
 }
 
-// approve query 
-if(isset($_GET['approve'])){
+// change_to_subscriber query 
+if(isset($_GET['change_to_sub'])){
 
 
     // Retreiving data from post
-    $the_user_id = $_GET['approve_user'];
+    $the_user_id = $_GET['change_to_sub'];
 
-    $query = "UPDATE users SET comment_status ='approved' ";
-    $query .= "WHERE comment_id = $the_user_id";
+    $query = "UPDATE users SET user_role ='subscriber' ";
+    $query .= "WHERE user_id = $the_user_id";
 
-    $approve_comment_query = mysqli_query($connection, $query);
+    $change_to_sub_query = mysqli_query($connection, $query);
 
     // Refresh page
     header("Location: users.php");
