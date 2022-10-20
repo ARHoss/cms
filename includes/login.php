@@ -35,21 +35,21 @@
         }
 
         // login check
-        if($username !== $db_username && $user_password !== $db_user_password){ // if username and password dont match
+        // === check if the variables are exactly identical
+        if($username === $db_username && $user_password === $db_user_password){ // if username and password matches
+            
+             // setting Session variables
+             $_SESSION['username'] = $db_username;
+             $_SESSION['firstname'] = $db_user_firstname;
+             $_SESSION['lastname'] = $db_user_lastname;
+             $_SESSION['user_role'] = $db_user_role;
+             
+             header("Location: ../admin");
+            
+        }else { // anything else
+            
             header("Location: ../index.php");
-        }else if ($username == $db_username && $user_password == $db_user_password){ // if username and password matches
             
-            
-            // setting Session variables
-            $_SESSION['username'] = $db_username;
-            $_SESSION['firstname'] = $db_user_firstname;
-            $_SESSION['lastname'] = $db_user_lastname;
-            $_SESSION['user_role'] = $db_user_role;
-            
-            header("Location: ../admin");
- 
-        }else{ // anything else
-            header("Location: ../index.php");
         }
 
 

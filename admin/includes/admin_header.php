@@ -19,15 +19,11 @@
 
         if($_SESSION['user_role'] == "subscriber"){
 
-            header("Location: ../index.php");
+            // As subscriber function not defined
+            header("Location: ../includes/logout.php");
         }
 
-    }
-
-    
-        
-
-    
+    }    
 
 ?>
 
