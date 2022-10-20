@@ -19,7 +19,7 @@
                         
                         <h1 class="page-header">
                             Welcome to Admin
-                            <small>Author Name</small>
+                            <small><?php echo $_SESSION['firstname']; ?></small>
                         </h1>
                         
                         <!-- Content -->

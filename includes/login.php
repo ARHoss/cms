@@ -39,6 +39,7 @@
         if($username === $db_username && $user_password === $db_user_password){ // if username and password matches
             
              // setting Session variables
+             $_SESSION['id'] = $db_user_id;
              $_SESSION['username'] = $db_username;
              $_SESSION['firstname'] = $db_user_firstname;
              $_SESSION['lastname'] = $db_user_lastname;
