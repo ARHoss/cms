@@ -48,7 +48,15 @@
                                         <i class="fa fa-file-text fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                <div class='huge'>12</div>
+                                        <!-- Dynamic data -->
+                                <?php 
+                                
+                                $query = "SELECT * FROM posts";
+                                $post_counts_query = mysqli_query($connection, $query);
+                                $post_counts = mysqli_num_rows($post_counts_query);
+
+                                echo "<div class='huge'>{$post_counts}</div>"
+                                ?> 
                                         <div>Posts</div>
                                     </div>
                                 </div>
@@ -71,7 +79,15 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                    <div class='huge'>23</div>
+                                        <!-- Dynamic data -->
+                                        <?php 
+                                
+                                        $query = "SELECT * FROM comments";
+                                        $comment_counts_query = mysqli_query($connection, $query);
+                                        $comment_counts = mysqli_num_rows($comment_counts_query);
+
+                                        echo "<div class='huge'>{$comment_counts}</div>"
+                                        ?> 
                                     <div>Comments</div>
                                     </div>
                                 </div>
@@ -94,7 +110,15 @@
                                         <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                    <div class='huge'>23</div>
+                                        <!-- Dynamic data -->
+                                        <?php 
+                                
+                                        $query = "SELECT * FROM users";
+                                        $user_counts_query = mysqli_query($connection, $query);
+                                        $user_counts = mysqli_num_rows($user_counts_query);
+
+                                        echo "<div class='huge'>{$user_counts}</div>"
+                                        ?> 
                                         <div> Users</div>
                                     </div>
                                 </div>
@@ -117,7 +141,15 @@
                                         <i class="fa fa-list fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class='huge'>13</div>
+                                        <!-- Dynamic data -->
+                                        <?php 
+                                
+                                        $query = "SELECT * FROM categories";
+                                        $category_counts_query = mysqli_query($connection, $query);
+                                        $category_counts = mysqli_num_rows($category_counts_query);
+
+                                        echo "<div class='huge'>{$category_counts}</div>"
+                                        ?>  
                                         <div>Categories</div>
                                     </div>
                                 </div>
