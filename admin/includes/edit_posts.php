@@ -1,3 +1,83 @@
+<?php 
+
+    if(isset($_POST['update_post'])){
+            
+        // Retrieving Values from form
+        $the_post_id = $_GET['p_id'];
+        // echo $the_post_id;
+        $post_title = $_POST['post_title'];
+        // echo $post_category_id;
+        
+        $post_category_id = $_POST['post_category_id'];
+        // echo $post_category_id;
+        
+        $post_author = $_POST['post_author'];
+        // echo $post_author;
+
+        $post_status = $_POST['post_status'];
+        // echo $post_status;
+        
+        $post_image = $_FILES['post_image']['name'];
+        $post_image_temp = $_FILES['post_image']['tmp_name'];
+        
+        
+        $post_tags = $_POST['post_tags'];
+        $post_content = $_POST['post_content'];
+        $post_comment_count = 4;
+        $post_date = date('d-m-y');
+
+        // Function for images
+        // if it does not work provide permsission to the folder to everyone
+        // Image is transferred from $post_image_temp to $post_image
+        move_uploaded_file($post_image_temp, "../images/$post_image");
+        
+
+        // Re-populating the post_image when an empty image form submitted
+        if(empty($post_image)){
+
+
+        $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+        $image_query = mysqli_query($connection, $query);
+        
+
+            while($row = mysqli_fetch_assoc($image_query)){
+                
+            
+                $post_image = $row['post_image'];
+
+
+            }
+        }
+
+        $query = "UPDATE posts SET post_category_id=$post_category_id, post_title='$post_title', 
+        post_author='$post_author', post_date=now(), post_image='$post_image', post_content='$post_content', post_tags='$post_tags', 
+        post_comment_count=$post_comment_count, post_status='$post_status' ";
+        $query .= "WHERE post_id = $the_post_id";
+
+        $create_update_query = mysqli_query($connection, $query);
+        
+
+        // Refreshes the page after deleteion
+        // header("Location: posts.php");
+        
+
+
+
+        // Checking query 
+        // confirmQuery($create_update_query);
+
+        // Provides message after updating post
+        // class bg success gives color to the notification
+        echo "<p class='bg-success'>Post Updated: "." "."<a href=../post.php?p_id=$the_post_id>View Post</a> or <a href='posts.php'>View All Posts</a></p>";
+
+        
+    }
+
+
+
+?>
+
+
 <!-- enctype is resposible for sending different form data -->
 <form action="" method="post" enctype="multipart/form-data">
 
@@ -106,80 +186,6 @@
     </div>  
     
 </form>
-
-<?php 
-
-    if(isset($_POST['update_post'])){
-            
-        // Retrieving Values from form
-        $the_post_id = $_GET['p_id'];
-        // echo $the_post_id;
-        $post_title = $_POST['post_title'];
-        // echo $post_category_id;
-        
-        $post_category_id = $_POST['post_category_id'];
-        // echo $post_category_id;
-        
-        $post_author = $_POST['post_author'];
-        // echo $post_author;
-
-        $post_status = $_POST['post_status'];
-        // echo $post_status;
-        
-        $post_image = $_FILES['post_image']['name'];
-        $post_image_temp = $_FILES['post_image']['tmp_name'];
-        
-        
-        $post_tags = $_POST['post_tags'];
-        $post_content = $_POST['post_content'];
-        $post_comment_count = 4;
-        $post_date = date('d-m-y');
-
-        // Function for images
-        // if it does not work provide permsission to the folder to everyone
-        // Image is transferred from $post_image_temp to $post_image
-        move_uploaded_file($post_image_temp, "../images/$post_image");
-        
-
-        // Re-populating the post_image when an empty image form submitted
-        if(empty($post_image)){
-
-
-        $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
-        $image_query = mysqli_query($connection, $query);
-        
-
-            while($row = mysqli_fetch_assoc($image_query)){
-                
-            
-                $post_image = $row['post_image'];
-
-
-            }
-        }
-
-        $query = "UPDATE posts SET post_category_id=$post_category_id, post_title='$post_title', 
-        post_author='$post_author', post_date=now(), post_image='$post_image', post_content='$post_content', post_tags='$post_tags', 
-        post_comment_count=$post_comment_count, post_status='$post_status' ";
-        $query .= "WHERE post_id = $the_post_id";
-
-        $create_update_query = mysqli_query($connection, $query);
-
-        // Refreshes the page after deleteion
-        header("Location: posts.php");
-        
-
-
-
-        // Checking query 
-        // confirmQuery($create_update_query);
-
-        
-    }
-
-
-
-?>
 
 
 

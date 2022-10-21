@@ -36,7 +36,7 @@
 
 
         // Provides message after creating user
-        echo "User Created: "." "."<a href=users.php>View Users</a>";
+        echo "<p class='bg-success'>User Created: "." "."<a href=users.php>View All Users</a></p>";
 
         
     }
