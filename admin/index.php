@@ -181,15 +181,22 @@
 
                             <?php
 
+                             $element_texts =['Active Posts', 'Categories', 'Users', 'Comments'];
+                             $element_counts =[$post_counts, $category_counts, $user_counts, $comment_counts];
+                             
+                             for ($i=0; $i < 4; $i++) { 
+                                # code... - replicating this data below -> 
+                                // ['Posts', 1000]
+                                // ['Posts', 1000],
+                                // ['Posts', 1000],
+                                // ['Posts', 1000],
 
 
+                                echo "['{$element_texts[$i]}'".","."'{$element_counts[$i]}'],";
+                                
+                             }
 
-                            ?>
-
-
-
-
-                        ['Posts', 1000]
+                            ?>                       
                         ]);
 
                         var options = {
