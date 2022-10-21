@@ -166,6 +166,29 @@
                 </div>
                 <!-- /.row -->
 
+                <?php 
+
+
+                    // Draft posts count
+                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+                    $select_all_draft_posts_query = mysqli_query($connection, $query);
+                    $draft_post_counts = mysqli_num_rows($select_all_draft_posts_query);
+                    // Unapproved comments count
+                    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+                    $select_all_unapproved_comments_query = mysqli_query($connection, $query);
+                    $unapproved_comment_counts = mysqli_num_rows($select_all_unapproved_comments_query);
+                    // Subscriber Users
+                    $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+                    $select_all_subscriber_user_query = mysqli_query($connection, $query);
+                    $subscriber_user_counts = mysqli_num_rows($select_all_subscriber_user_query);
+                    
+
+                    
+                
+                
+                ?>
+                
+
                 <!-- Google charts -->
 
                 <div class="row">
@@ -181,10 +204,10 @@
 
                             <?php
 
-                             $element_texts =['Active Posts', 'Comments', 'Users', 'Categories'];
-                             $element_counts =[$post_counts, $comment_counts, $user_counts, $category_counts];
+                             $element_texts =['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscriber', 'Categories'];
+                             $element_counts =[$post_counts, $draft_post_counts, $comment_counts, $unapproved_comment_counts,$user_counts, $subscriber_user_counts, $category_counts];
                              
-                             for ($i=0; $i < 4; $i++) { 
+                             for ($i=0; $i < 7; $i++) { 
                                 # code... - replicating this data below -> 
                                 // ['Posts', 1000]
                                 // ['Posts', 1000],
