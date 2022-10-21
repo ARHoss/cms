@@ -34,6 +34,10 @@
         // Checking query 
         // confirmQuery($create_user_query);
 
+
+        // Provides message after creating user
+        echo "User Created: "." "."<a href=users.php>View Users</a>";
+
         
     }
 

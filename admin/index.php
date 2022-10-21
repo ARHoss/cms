@@ -169,6 +169,11 @@
                 <?php 
 
 
+                    // Published posts count
+                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $select_all_published_posts_query = mysqli_query($connection, $query);
+                    $published_post_counts = mysqli_num_rows($select_all_published_posts_query);
+
                     // Draft posts count
                     $query = "SELECT * FROM posts WHERE post_status = 'draft'";
                     $select_all_draft_posts_query = mysqli_query($connection, $query);
@@ -204,10 +209,10 @@
 
                             <?php
 
-                             $element_texts =['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscriber', 'Categories'];
-                             $element_counts =[$post_counts, $draft_post_counts, $comment_counts, $unapproved_comment_counts,$user_counts, $subscriber_user_counts, $category_counts];
+                             $element_texts =['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscriber', 'Categories'];
+                             $element_counts =[$post_counts, $published_post_counts, $draft_post_counts, $comment_counts, $unapproved_comment_counts,$user_counts, $subscriber_user_counts, $category_counts];
                              
-                             for ($i=0; $i < 7; $i++) { 
+                             for ($i=0; $i < 8; $i++) { 
                                 # code... - replicating this data below -> 
                                 // ['Posts', 1000]
                                 // ['Posts', 1000],
@@ -230,8 +235,11 @@
                         };
 
                         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+                       
 
                         chart.draw(data, google.charts.Bar.convertOptions(options));
+
+                        
                     }
                     </script>
 
