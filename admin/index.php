@@ -181,8 +181,8 @@
 
                             <?php
 
-                             $element_texts =['Active Posts', 'Categories', 'Users', 'Comments'];
-                             $element_counts =[$post_counts, $category_counts, $user_counts, $comment_counts];
+                             $element_texts =['Active Posts', 'Comments', 'Users', 'Categories'];
+                             $element_counts =[$post_counts, $comment_counts, $user_counts, $category_counts];
                              
                              for ($i=0; $i < 4; $i++) { 
                                 # code... - replicating this data below -> 
