@@ -1,5 +1,17 @@
 <?php 
 
+// Protects from SQL injection
+function escape($string){
+
+    // Must for function
+    global $connection;
+
+    // Checking for sql and html injections
+    mysqli_real_escape_string($connection, trim($string));
+
+
+}
+
 
 function insertCategories(){
 
