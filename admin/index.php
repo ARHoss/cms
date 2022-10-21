@@ -208,6 +208,7 @@
                         ['Data', 'Count'],
 
                             <?php
+                            
 
                              $element_texts =['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscriber', 'Categories'];
                              $element_counts =[$post_counts, $published_post_counts, $draft_post_counts, $comment_counts, $unapproved_comment_counts,$user_counts, $subscriber_user_counts, $category_counts];
@@ -220,7 +221,7 @@
                                 // ['Posts', 1000],
 
 
-                                echo "['{$element_texts[$i]}'".","."'{$element_counts[$i]}'],";
+                                echo "['{$element_texts[$i]}'".","."{$element_counts[$i]}],";
                                 
                              }
 
