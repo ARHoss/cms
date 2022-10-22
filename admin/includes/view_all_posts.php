@@ -28,7 +28,7 @@
         <!-- Add post button -->
         <a href="posts.php?source=add_posts" class="btn btn-primary">Add New</a>
 
-
+        
     </div>
 
 
@@ -134,14 +134,37 @@
         $bulk_post_status = $_POST['bulk_post_status'];
 
         // loop
-        foreach ($bulk_posts_id as $checkbox) {
-            # code...
-            echo $checkbox;
+        foreach ($bulk_posts_id as $checkbox_post_id) {
+            
+            
+            switch ($bulk_post_status) {
+                case 'published':
+                    
+                    $query = "UPDATE posts SET post_status='$bulk_post_status' ";
+                    $query .= "WHERE post_id = $checkbox_post_id";
+                    $bulk_update_status_query = mysqli_query($connection, $query);
+                    header("Location: posts.php");
+                    break;
 
+                case 'draft':
+                    $query = "UPDATE posts SET post_status='$bulk_post_status' ";
+                    $query .= "WHERE post_id = $checkbox_post_id";
+                    $bulk_update_status_query = mysqli_query($connection, $query);
+                    header("Location: posts.php");
+                    break;
 
+                case 'delete':
+                    # code...
+                    break;
+    
+                default:
+                    # code...
+                    echo "No Options Selected";
+                    break;
+            }
+            
         }
 
-        // or bulk query
 
 
 
