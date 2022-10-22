@@ -30,12 +30,16 @@
                         echo "<li><a href='#'>{$cat_title}</a></li>";
                         
                     }
-                    
+        
                     
                     ?>
                     <li>
-                        <a href="admin">Admin</a>
+                        <?php if($_SESSION['user_role'] === "admin"){echo "<a href='admin'>Admin</a>";} ?>
                     </li>
+
+                    
+                    
+                    
                 
 
                 </ul>
