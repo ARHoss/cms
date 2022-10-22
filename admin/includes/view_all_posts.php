@@ -4,6 +4,7 @@
 <form action="" method="post">
 
 
+    <!-- Creating select field -->
     <div id="bulkOptionsContainer" class="col-xs-4">
         <!-- Pupalting post status -->
         <select class="form-control" name="bulk_post_status" id="bulk_post_status">
@@ -16,7 +17,8 @@
         </select>
 
     </div>
-        
+    
+    <!-- Creating Submit button and link to add post -->
     <div class="col-xs-4">
 
         <input class="btn btn-success" type="submit" name="bulk_post" value="Apply">
@@ -24,14 +26,14 @@
 
 
     </div>
-        
-    
-
 
 
     <table class = "table table-bordered table-hover">
         <thead>
             <tr>
+                <!-- Check Box -->
+                <th><input type="checkbox"></th>
+                
                 <th>Id</th>
                 <th>Author</th>
                 <th>Title</th>
@@ -68,7 +70,16 @@
 
             
                     echo "<tr>";
-                    
+            ?>
+            
+            
+            <!-- Check Boxes -->
+            <th><input class="checkBoxes" type="checkbox" value="<?php echo $post_id; ?>" name="checkBoxArray[]"></th>
+            
+            
+            
+            <?php
+            
                     echo "<td>{$post_id}</td>";
                     echo "<td>{$post_author}</td>";
                     echo "<td>{$post_title}</td>";
