@@ -1,10 +1,12 @@
 
 
 <!-- Creating bulk options container -->
+<!-- bulk_post 1 -->
 <form action="" method="post">
 
 
     <!-- Creating select field -->
+    <!-- bulk_post 2 -->
     <div id="bulkOptionsContainer" class="col-xs-4">
         <!-- Pupalting post status -->
         <select class="form-control" name="bulk_post_status" id="bulk_post_status">
@@ -20,8 +22,10 @@
     
     <!-- Creating Submit button and link to add post -->
     <div class="col-xs-4">
-
-        <input class="btn btn-success" type="submit" name="bulk_post" value="Apply">
+        <!-- bulk_post 3 -->
+        <input class="btn btn-success" type="submit" name="" value="Apply">
+        
+        <!-- Add post button -->
         <a href="posts.php?source=add_posts" class="btn btn-primary">Add New</a>
 
 
@@ -32,6 +36,7 @@
         <thead>
             <tr>
                 <!-- Check Box -->
+                <!-- bulk_post 4 -->
                 <th><input type="checkbox"></th>
                 
                 <th>Id</th>
@@ -74,6 +79,8 @@
             
             
             <!-- Check Boxes -->
+            <!-- bulk_post 5 -->
+            <!-- Sends id to the array checkBoxArray[] -->
             <th><input class="checkBoxes" type="checkbox" value="<?php echo $post_id; ?>" name="checkBoxArray[]"></th>
             
             
@@ -116,6 +123,35 @@
 
     </table>
 </form>
+
+
+<?php 
+
+    // Check for the checkbox array or error is generated
+    if(isset($_POST['checkBoxArray'])){
+
+        $bulk_posts_id = $_POST['checkBoxArray'];
+        $bulk_post_status = $_POST['bulk_post_status'];
+
+        // loop
+        foreach ($bulk_posts_id as $checkbox) {
+            # code...
+            echo $checkbox;
+
+
+        }
+
+        // or bulk query
+
+
+
+
+    }
+
+
+
+?>
+
 
 
 
