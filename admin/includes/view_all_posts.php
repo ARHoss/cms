@@ -154,11 +154,14 @@
                     break;
 
                 case 'delete':
-                    # code...
+                    $query = "DELETE FROM posts ";
+                    $query .= "WHERE post_id = $checkbox_post_id";
+                    $bulk_update_delete_query = mysqli_query($connection, $query);
+                    header("Location: posts.php");
                     break;
     
                 default:
-                    # code...
+                    // Prints default message
                     echo "No Options Selected";
                     break;
             }

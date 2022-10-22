@@ -34,18 +34,29 @@
                     
                     ?>
                     <li>
-                        <?php if($_SESSION['user_role'] === "admin"){echo "<a href='admin'>Admin</a>";} ?>
+                        <?php  
+                        
+                            if(isset($_SESSION['user_role'])){
+                                if($_SESSION['user_role'] === "admin"){
+                                    echo "<a href='admin'>Admin</a>";
+                                }
+                            }
+                        
+                        
+                        ?>
                     </li>
                     
                     <!-- Dynamic edit post link for admin -->
                     <li>
                         <?php 
                         
-                            if($_SESSION['user_role'] === "admin"){    
-                                if(isset($_GET['p_id'])){
-                                    
-                                    $post_id= $_GET['p_id'];
-                                    echo "<td><a href=admin/posts.php?source=edit_posts&p_id=$post_id>Edit Post</a></td>";
+                            if(isset($_SESSION['user_role'])){
+                                if($_SESSION['user_role'] === "admin"){    
+                                    if(isset($_GET['p_id'])){
+                                        
+                                        $post_id= $_GET['p_id'];
+                                        echo "<td><a href=admin/posts.php?source=edit_posts&p_id=$post_id>Edit Post</a></td>";
+                                    }
                                 }
                             }
                                 
