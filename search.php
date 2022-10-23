@@ -51,8 +51,8 @@
                     ?>
     
                     <h1 class="page-header">
-                        Page Heading
-                        <small>Secondary Text</small>
+                        CMS
+                        <small>Welcome</small>
                     </h1>
     
                     <!-- First Blog Post -->
