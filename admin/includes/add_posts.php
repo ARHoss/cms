@@ -80,12 +80,6 @@
         </select>
 
    </div>
-   <!-- Populate category select field Ends-->
-
-    <!-- <div class="form-group">
-        <label for="post_category_id">Post Category Id</label>
-        <input type="text" class="form-control" name="post_category_id">
-    </div> -->
 
     <div class="form-group">
         <label for="post_author">Post Author</label>
@@ -94,7 +88,7 @@
 
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <select name="post_status" id="post_status">
+        <select class="form-control" name="post_status" id="post_status">
 
             <option value="published">Published</option>
             <option value="draft">Draft</option>
