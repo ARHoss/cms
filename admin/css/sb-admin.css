@@ -224,6 +224,6 @@ ul.alert-dropdown {
 }
 
 /* CSS not working */
-#bulkOptionsContainer{
+.bulkOptionsContainer{
     padding: 0px;
 }

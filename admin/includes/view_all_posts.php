@@ -7,7 +7,8 @@
 
     <!-- Creating select field -->
     <!-- bulk_post 2 -->
-    <div id="bulkOptionsContainer" class="col-xs-4">
+    <!-- using inline style as css sb-admin.css not working -->
+    <div class="col-xs-4 bulkOptionsContainer" style="padding: 0px;">
         <!-- Pupalting post status -->
         <select class="form-control" name="bulk_post_status" id="bulk_post_status">
 
