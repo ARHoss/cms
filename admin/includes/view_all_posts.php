@@ -22,7 +22,7 @@
     
     <!-- Creating Submit button and link to add post -->
     <div class="col-xs-4">
-        <!-- bulk_post 3 -->
+        <!-- bulk_post 3  -->
         <input class="btn btn-success" type="submit" name="" value="Apply">
         
         <!-- Add post button -->
@@ -36,8 +36,8 @@
         <thead>
             <tr>
                 <!-- Check Box -->
-                <!-- bulk_post 4 -->
-                <th><input type="checkbox"></th>
+                <!-- bulk_post 4 Selects all-->
+                <th><input class="allCheckBoxes" type="checkbox"></th>
                 
                 <th>Id</th>
                 <th>Author</th>
@@ -81,7 +81,8 @@
             <!-- Check Boxes -->
             <!-- bulk_post 5 -->
             <!-- Sends id to the array checkBoxArray[] -->
-            <th><input class="checkBoxes" type="checkbox" value="<?php echo $post_id; ?>" name="checkBoxArray[]"></th>
+            <!-- Selects each post one at time -->
+            <th><input class="checkBox" type="checkbox" value="<?php echo $post_id; ?>" name="checkBoxArray[]"></th>
             
             
             
