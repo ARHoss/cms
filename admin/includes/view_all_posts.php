@@ -49,6 +49,7 @@
                 <th>Tags</th>
                 <th>Comments</th>
                 <th>Date</th>
+                <th>View Post</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -92,7 +93,7 @@
                     echo "<td>{$post_id}</td>";
                     echo "<td>{$post_author}</td>";
 
-                    // Adding link to see posts
+                    //link to see individual post
                     echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
 
 
@@ -110,6 +111,9 @@
                     echo "<td>{$post_tags}</td>";
                     echo "<td>{$post_comment_count}</td>";
                     echo "<td>{$post_date}</td>";
+
+                    //View post link
+                    echo "<td><a href=../post.php?p_id=$post_id>View Post</a></td>";
 
                     //Edit post link
                     echo "<td><a href=posts.php?source=edit_posts&p_id=$post_id>Edit</a></td>";
