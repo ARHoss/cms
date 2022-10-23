@@ -34,8 +34,15 @@
 
         $create_post_query = mysqli_query($connection, $query);
 
+        // Pull the last created id
+        $the_post_id = mysqli_insert_id($connection);
+
         // Checking query 
         // confirmQuery($create_post_query);
+
+        // Provides message after adding post
+        // class bg success gives color to the notification
+        echo "<p class='bg-success'>Post Successfully Added: "." "."<a href=../post.php?p_id=$the_post_id>View Post</a> or <a href='posts.php'>View All Posts</a></p>";
 
         
     }

@@ -4,32 +4,35 @@
                 <!-- Add Comment -->
                 <?php 
                 
-                if(isset($_POST['create_comment'])){
+                    if(isset($_POST['create_comment'])){
+                        if( !empty($_POST['comment_author']) && !empty($_POST['comment_email'])  && !empty($_POST['comment_content']) ){
+                            $the_post_id = $_GET['p_id'];
 
-                    $the_post_id = $_GET['p_id'];
+                            $comment_author = $_POST['comment_author'];
+                            $comment_email = $_POST['comment_email'];
+                            $comment_content = $_POST['comment_content'];
+                            
+                            // insert values
+                            $query = "INSERT INTO comments(comment_post_id, comment_author, 
+                            comment_email, comment_content, comment_status, comment_date) ";
 
-                    $comment_author = $_POST['comment_author'];
-                    $comment_email = $_POST['comment_email'];
-                    $comment_content = $_POST['comment_content'];
-                    
-                    // insert values
-                    $query = "INSERT INTO comments(comment_post_id, comment_author, 
-                    comment_email, comment_content, comment_status, comment_date) ";
+                            // use '' for strings
+                            $query .= "VALUES ({$the_post_id}, '{$comment_author}', '{$comment_email}', '{$comment_content}',
+                            'unapproved',now()) ";
 
-                    // use '' for strings
-                    $query .= "VALUES ({$the_post_id}, '{$comment_author}', '{$comment_email}', '{$comment_content}',
-                    'unapproved',now()) ";
+                            $create_comment_query = mysqli_query($connection, $query);
 
-                    $create_comment_query = mysqli_query($connection, $query);
+                            // Increasing post_comment_count
+                            $increase_comment_query ="UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
+                            $increase_post_comment_count_query = mysqli_query($connection, $increase_comment_query);
 
-                    // Increasing post_comment_count
-                    $increase_comment_query ="UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
-                    $increase_post_comment_count_query = mysqli_query($connection, $increase_comment_query);
-
-                    // Refresh page
-                    header("Location: post.php?p_id=$the_post_id");
-
-                }
+                            // Refresh page
+                            header("Location: post.php?p_id=$the_post_id");
+                        } else {
+                            // Using script alert to let user know fields cannot be empty
+                            echo "<script>alert('Fields Cannot be empty')</script>";
+                        }
+                    }
                 
                   
                 ?>
