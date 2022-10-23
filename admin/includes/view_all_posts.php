@@ -91,7 +91,9 @@
             
                     echo "<td>{$post_id}</td>";
                     echo "<td>{$post_author}</td>";
-                    echo "<td>{$post_title}</td>";
+
+                    // Adding link to see posts
+                    echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
 
 
                     // Populating category title from category table
