@@ -123,6 +123,9 @@
             $hashed_password = crypt($user_password, $randSalt);
 
 
+        }else{ 
+            $hashed_password = $user_password;
+
         }
         //----------------------Encryption-------------------------------------//
 
@@ -160,7 +163,7 @@
         $create_user_update_query = mysqli_query($connection, $user_update_query);
 
         // Refreshes the page after deleteion
-        header("Location: users.php");
+        // header("Location: users.php");
         
 
 
