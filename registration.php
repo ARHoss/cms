@@ -42,6 +42,9 @@ if(isset($_POST['user_register'])){
         $row = mysqli_fetch_assoc($select_randSalt_query);
         $randSalt = $row['randSalt'];
 
+        // Encrypting Password
+        $user_password = crypt($password, $randSalt);
+
 
         // insert values in DB
         $query = "INSERT INTO users(username, user_email, user_password, user_role, user_date_created) ";
@@ -51,7 +54,7 @@ if(isset($_POST['user_register'])){
             die("Query failed" . mysqli_error($connection));
         }
 
-        // $password = crypt($password, $hashF_and_salt);
+
 
         $message = "Your Registration has been submitted";
 
