@@ -35,9 +35,13 @@ if(isset($_POST['user_register'])){
     // Getting randSalt value
     $query = "SELECT randSalt FROM users";
     $select_randSalt_query = mysqli_query($connection, $query);
-
     if(!$select_randSalt_query){
         die("Query failed" . mysqli_error($connection));
+    }
+
+    while($row = mysqli_fetch_assoc($select_randSalt_query)){
+       
+        echo $row['randSalt'];
     }
 
     // $password = crypt($password, $hashF_and_salt);
