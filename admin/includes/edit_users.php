@@ -72,7 +72,7 @@
     </div>
 
     <div class="form-group">
-        <label for="user_password">Password</label>
+        <label for="db_user_password">Password</label>
         <input value=<?php if(isset($db_user_password)){echo $db_user_password;} ?> type="password" class="form-control" name="user_password">
     </div>
 

@@ -135,10 +135,38 @@
     </div>
     <!-- Populate select field Ends-->
 
-    <div class="form-group">
+    <!-- Populate author select field-->
+   <div class="form-group">
         <label for="post_author">Post Author</label>
-        <input value=<?php if(isset($post_author)){echo $post_author;} ?> type="text" class="form-control" name="post_author">
-    </div>
+        <select name="post_author" id="post_author">
+
+        <option value=<?php if(isset($post_author)){echo $post_author;} ?>><?php echo $post_author;?></option>
+        <?php 
+        
+        $query = "SELECT user_firstname FROM users";
+        $select_authors = mysqli_query($connection, $query);
+
+        while($row = mysqli_fetch_assoc($select_authors)){
+            
+            $db_post_author = $row['user_firstname'];
+
+
+            if(isset($post_author) && $post_author !== $db_post_author){
+                
+                echo "<option value=$db_post_author>$db_post_author</option>";
+
+            }
+        
+        }  
+        
+        
+        ?>
+        
+        </select>
+
+   </div>
+
+    
 
     <!-- Pupalting post status -->
     <div class="form-group">
