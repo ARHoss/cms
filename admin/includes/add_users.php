@@ -10,13 +10,7 @@
         //----------------------Encryption-------------------------------------//
         $user_password = $_POST['user_password'];
         // Getting randSalt value
-        $query = "SELECT randSalt FROM users";
-        $select_randSalt_query = mysqli_query($connection, $query);
-        if(!$select_randSalt_query){
-            die("Query failed" . mysqli_error($connection));
-        }
-        $row = mysqli_fetch_assoc($select_randSalt_query);
-        $randSalt = $row['randSalt'];
+        $randSalt = randSalt();
         // Encrypting Password
         $hashed_password= crypt($user_password, $randSalt);
         //----------------------Encryption-------------------------------------//
@@ -52,7 +46,7 @@
 
 
         // Provides message after creating user
-        echo "<p class='bg-success'>User Created: "." "."<a href=users.php>View All Users</a></p>";
+        $message = "User Created Successfully";
 
         
     }
@@ -65,6 +59,10 @@
 <!-- enctype is resposible for sending different form data -->
 <!-- Form to add user -->
 <form action="" method="post" enctype="multipart/form-data">
+
+
+    <!-- Success Message -->
+    <h5 class="text-center"><strong><?php if(isset($message)) {echo $message;}?></strong></h5>  
 
     <div class="form-group">
         <label for="user_firstname">First Name</label>

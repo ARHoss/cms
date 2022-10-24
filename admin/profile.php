@@ -15,7 +15,7 @@
                     <div class="col-lg-12">
                         
                     <h1 class="page-header">
-                            Welcome to admin
+                            Welcome to Admin
                             <small><?php echo $_SESSION['firstname']; ?></small>
                             
                     </h1>
@@ -136,14 +136,9 @@
                             $user_password = $_POST['user_password'];
 
                             if($user_password !== $db_user_password){
+                               
                                 // Getting randSalt value
-                                $query = "SELECT randSalt FROM users";
-                                $select_randSalt_query = mysqli_query($connection, $query);
-                                if(!$select_randSalt_query){
-                                    die("Query failed" . mysqli_error($connection));
-                                }
-                                $row = mysqli_fetch_assoc($select_randSalt_query);
-                                $randSalt = $row['randSalt'];
+                                $randSalt = randSalt();
                                 // Encrypting Password
                                 $hashed_password = crypt($user_password, $randSalt);
 
@@ -185,6 +180,9 @@
                             $user_update_query .= "WHERE user_id = $the_user_id";
 
                             $create_user_update_query = mysqli_query($connection, $user_update_query);
+
+                            // Refreshes the page after deleteion
+                            header("Location: users.php");
 
                             // Refreshes the page after deleteion
                             // header("Location: profile.php");

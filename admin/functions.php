@@ -1,5 +1,23 @@
 <?php 
 
+
+function randSalt(){
+
+    global $connection;
+
+     // Getting randSalt value
+     $query = "SELECT randSalt FROM users";
+     $select_randSalt_query = mysqli_query($connection, $query);
+     if(!$select_randSalt_query){
+         die("Query failed" . mysqli_error($connection));
+     }
+
+     $row = mysqli_fetch_assoc($select_randSalt_query);
+    return $row['randSalt'];
+
+}
+
+
 // Protects from SQL injection
 function escape($string){
 

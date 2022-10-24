@@ -1,4 +1,3 @@
-<?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
 
 
@@ -30,21 +29,13 @@ if(isset($_POST['user_register'])){
         $user_email = mysqli_real_escape_string($connection, $user_email);
         $user_password   = mysqli_real_escape_string($connection, $user_password);
 
-        // Encryption
 
+        //----------------------Encrypting Password---------------------
         // Getting randSalt value
-        $query = "SELECT randSalt FROM users";
-        $select_randSalt_query = mysqli_query($connection, $query);
-        if(!$select_randSalt_query){
-            die("Query failed" . mysqli_error($connection));
-        }
-
-        $row = mysqli_fetch_assoc($select_randSalt_query);
-        $randSalt = $row['randSalt'];
-
-        // Encrypting Password
+        $randSalt = randSalt();
+        // Hashing password
         $hashed_password = crypt($user_password, $randSalt);
-
+        //----------------------Encrypting Password---------------------
 
         // insert values in DB
         $query = "INSERT INTO users(username, user_email, user_password, user_role, user_date_created) ";
@@ -53,7 +44,6 @@ if(isset($_POST['user_register'])){
         if(!$add_new_user_query){
             die("Query failed" . mysqli_error($connection));
         }
-
 
 
         $message = "Your Registration has been submitted";

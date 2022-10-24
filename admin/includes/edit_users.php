@@ -112,13 +112,7 @@
 
         if($user_password !== $db_user_password){
             // Getting randSalt value
-            $query = "SELECT randSalt FROM users";
-            $select_randSalt_query = mysqli_query($connection, $query);
-            if(!$select_randSalt_query){
-                die("Query failed" . mysqli_error($connection));
-            }
-            $row = mysqli_fetch_assoc($select_randSalt_query);
-            $randSalt = $row['randSalt'];
+            $randSalt = randSalt();
             // Encrypting Password
             $hashed_password = crypt($user_password, $randSalt);
 
@@ -163,7 +157,7 @@
         $create_user_update_query = mysqli_query($connection, $user_update_query);
 
         // Refreshes the page after deleteion
-        // header("Location: users.php");
+        header("Location: users.php");
         
 
 
