@@ -13,6 +13,11 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
+                    <h1 class="page-header">
+                        CMS
+                        <small>Welcome</small>
+                    </h1>
+
                 <!-- Main content of the cms -->
                 <?php   
 
@@ -39,10 +44,7 @@
 
                 ?>
 
-                    <h1 class="page-header">
-                        CMS
-                        <small>Welcome</small>
-                    </h1>
+
 
                 <!-- First Blog Post -->
                 <h2>

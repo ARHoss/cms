@@ -12,6 +12,10 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+                    <h1 class="page-header">
+                        CMS
+                        <small>Welcome</small>
+                    </h1>
 
                 <!-- Main content of the cms -->
                 <?php   
@@ -38,10 +42,7 @@
 
                 ?>
 
-                    <h1 class="page-header">
-                        CMS
-                        <small>Welcome</small>
-                    </h1>
+
 
                     <!-- First Blog Post -->
                     <h2>
@@ -50,7 +51,7 @@
                     
                     </h2>
                     <p class="lead">
-                        by <a href="index.php"><?php echo $post_author;?></a>
+                        by <a href="author.php?post_author=<?php echo $post_author;?>"><?php echo $post_author;?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date;?></p>
                     <hr>
