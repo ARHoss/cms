@@ -119,7 +119,9 @@
                     echo "<td><a href=posts.php?source=edit_posts&p_id=$post_id>Edit</a></td>";
 
                     //Delete post link
-                    echo "<td><a href=posts.php?delete=$post_id>Delete</a></td>";
+                    // Using JS to confirm deletion
+                    // confirm() is a function
+                    echo "<td><a href=posts.php?delete=$post_id onClick=\"javascript: return confirm('Are you sure you want to delete')\">Delete</a></td>";
 
                                                                             
                     echo "</tr>";
