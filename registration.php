@@ -53,23 +53,17 @@ if(isset($_POST['user_register'])){
 
         // $password = crypt($password, $hashF_and_salt);
 
+        $message = "Your Registration has been submitted";
+
     } else{
-        echo "Fields Cannot Be Empty";
+
+        $message = "Fields Cannot Be Empty";
+
     }
 
 
 
-
-
-
 }
-
-
-
-
-
-
-
 
 ?>
 
@@ -81,6 +75,10 @@ if(isset($_POST['user_register'])){
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                        
+                        <!-- Registration Message -->
+                        <h5 class="text-center"><strong><?php if(isset($message)) {echo $message;}?></strong></h5>    
+                        
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" id="username" class="form-control" placeholder="Enter Desired Username" name="username" >
