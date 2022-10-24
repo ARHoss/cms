@@ -18,13 +18,17 @@
 
 if(isset($_POST['user_register'])){
 
-    echo "Its working";
-
-    // $username = $_POST['user_register']
 
 
-    //  // Checking for sql and html injections
-    // mysqli_real_escape_string($connection, trim($string));
+    $username   = $_POST['username'];
+    $password   = $_POST['user_password'];
+    $user_email = $_POST['user_email'];
+
+
+    // Checking for sql and html injections
+    echo $username   = mysqli_real_escape_string($connection, $username);
+    echo $password   = mysqli_real_escape_string($connection, $password);
+    echo $user_email = mysqli_real_escape_string($connection, $user_email);
 
 
 
@@ -50,18 +54,18 @@ if(isset($_POST['user_register'])){
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
-                            <input type="text" name="new_username" id="username" class="form-control" placeholder="Enter Desired Username">
+                            <input type="text" id="username" class="form-control" placeholder="Enter Desired Username" name="username" >
                         </div>
                          <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="new_email" id="email" class="form-control" placeholder="somebody@example.com">
+                            <input type="email" id="email" class="form-control" placeholder="somebody@example.com" name="user_email" >
                         </div>
                          <div class="form-group">
                             <label for="password" class="sr-only">Password</label>
-                            <input type="password" name="new_password" id="key" class="form-control" placeholder="Password">
+                            <input type="password" id="key" class="form-control" placeholder="Password" name="user_password">
                         </div>
                 
-                        <input type="submit" name="user_register" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
+                        <input type="submit" id="btn-login" class="btn btn-primary btn-lg btn-block " value="Register" name="user_register">
                     </form>
                  
                 </div>
