@@ -64,6 +64,9 @@
                         ?>
                     </li>
 
+                    <!-- Link for registration -->
+                    <li><a href="registration.php">Registration</a></li>
+
                     
                     
                     

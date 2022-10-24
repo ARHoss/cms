@@ -18,39 +18,44 @@
 
 if(isset($_POST['user_register'])){
 
+     if(!empty($_POST['username']) && !empty($_POST['user_password']) && !empty($_POST['user_email'])){ 
+
+        $username   = $_POST['username'];
+        $password   = $_POST['user_password'];
+        $user_email = $_POST['user_email'];
 
 
-    $username   = $_POST['username'];
-    $password   = $_POST['user_password'];
-    $user_email = $_POST['user_email'];
+        // Checking for sql and html injections
+        $username   = mysqli_real_escape_string($connection, $username);
+        $user_email = mysqli_real_escape_string($connection, $user_email);
+        $user_password   = mysqli_real_escape_string($connection, $password);
+
+        // Encryption
+
+        // Getting randSalt value
+        $query = "SELECT randSalt FROM users";
+        $select_randSalt_query = mysqli_query($connection, $query);
+        if(!$select_randSalt_query){
+            die("Query failed" . mysqli_error($connection));
+        }
+
+        $row = mysqli_fetch_assoc($select_randSalt_query);
+        $randSalt = $row['randSalt'];
 
 
-    // Checking for sql and html injections
-    $username   = mysqli_real_escape_string($connection, $username);
-    $user_email = mysqli_real_escape_string($connection, $user_email);
-    $password   = mysqli_real_escape_string($connection, $password);
+        // insert values in DB
+        $query = "INSERT INTO users(username, user_email, user_password, user_role, user_date_created) ";
+        $query .= "VALUES ('{$username}', '{$user_email}', '{$user_password}', 'subscriber',now() ) ";
+        $add_new_user_query = mysqli_query($connection, $query);
+        if(!$add_new_user_query){
+            die("Query failed" . mysqli_error($connection));
+        }
 
-    // Encryption
+        // $password = crypt($password, $hashF_and_salt);
 
-    // Getting randSalt value
-    $query = "SELECT randSalt FROM users";
-    $select_randSalt_query = mysqli_query($connection, $query);
-    if(!$select_randSalt_query){
-        die("Query failed" . mysqli_error($connection));
+    } else{
+        echo "Fields Cannot Be Empty";
     }
-
-    while($row = mysqli_fetch_assoc($select_randSalt_query)){
-       
-        echo $row['randSalt'];
-    }
-
-    // $password = crypt($password, $hashF_and_salt);
-
-
-
-
-    // $hashF_and_salt = $hashFormat.$salt;
-
 
 
 
