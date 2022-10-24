@@ -42,7 +42,7 @@
                             
                             // Retrieving Values from form
                             $username = $row['username'];
-                            $user_password = $row['user_password'];
+                            $db_user_password = $row['user_password'];
                             $user_firstname = $row['user_firstname'];
                             $user_lastname = $row['user_lastname'];
                             $user_email = $row['user_email'];
@@ -95,8 +95,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="user_password">Password</label>
-                        <input value=<?php if(isset($user_password)){echo $user_password;} ?> type="password" class="form-control" name="user_password">
+                        <label for="db_user_password">Password</label>
+                        <input value=<?php if(isset($db_user_password)){echo $db_user_password;} ?> type="password" class="form-control" name="user_password">
                     </div>
 
                     <div class="form-group">
@@ -132,7 +132,27 @@
 
                             $user_email = $_POST['user_email'];
 
+                            //----------------------Encryption-------------------------------------//
                             $user_password = $_POST['user_password'];
+
+                            if($user_password !== $db_user_password){
+                                // Getting randSalt value
+                                $query = "SELECT randSalt FROM users";
+                                $select_randSalt_query = mysqli_query($connection, $query);
+                                if(!$select_randSalt_query){
+                                    die("Query failed" . mysqli_error($connection));
+                                }
+                                $row = mysqli_fetch_assoc($select_randSalt_query);
+                                $randSalt = $row['randSalt'];
+                                // Encrypting Password
+                                $hashed_password = crypt($user_password, $randSalt);
+
+
+                            }else{ 
+                                $hashed_password = $user_password;
+
+                            }
+                            //----------------------Encryption-------------------------------------//
                             
                             $user_image = $_FILES['user_image']['name'];
                             $user_image_temp = $_FILES['user_image']['tmp_name'];
@@ -160,14 +180,14 @@
                                 }
                             }
 
-                            $user_update_query = "UPDATE users SET username='$username', user_password='$user_password', user_firstname='$user_firstname', user_lastname='$user_lastname', 
+                            $user_update_query = "UPDATE users SET username='$username', user_password='$hashed_password', user_firstname='$user_firstname', user_lastname='$user_lastname', 
                             user_email='$user_email', user_image='$user_image', user_role='$user_role' ";
                             $user_update_query .= "WHERE user_id = $the_user_id";
 
                             $create_user_update_query = mysqli_query($connection, $user_update_query);
 
                             // Refreshes the page after deleteion
-                            header("Location: profile.php");
+                            // header("Location: profile.php");
 
                             // Checking query 
                             // confirmQuery($create_update_query);
