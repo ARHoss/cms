@@ -6,7 +6,23 @@
         
         // Retrieving Values from form
         $username = $_POST['username'];
+
+        //----------------------Encryption-------------------------------------//
         $user_password = $_POST['user_password'];
+        // Getting randSalt value
+        $query = "SELECT randSalt FROM users";
+        $select_randSalt_query = mysqli_query($connection, $query);
+        if(!$select_randSalt_query){
+            die("Query failed" . mysqli_error($connection));
+        }
+        $row = mysqli_fetch_assoc($select_randSalt_query);
+        $randSalt = $row['randSalt'];
+        // Encrypting Password
+        $user_password = crypt($user_password, $randSalt);
+         //----------------------Encryption-------------------------------------//
+
+
+        
         $user_firstname = $_POST['user_firstname'];
         $user_lastname = $_POST['user_lastname'];
         $user_email = $_POST['user_email'];

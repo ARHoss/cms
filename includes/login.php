@@ -34,6 +34,11 @@
             
         }
 
+        //--------------dencrypt the password-----------------------------
+        // Left is entered password - right password stored in database
+        $user_password = crypt($user_password, $db_user_password);
+        //--------------dencrypt the password-----------------------------
+
         // login check
         // === check if the variables are exactly identical
         if($username === $db_username && $user_password === $db_user_password){ // if username and password matches

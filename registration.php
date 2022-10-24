@@ -21,14 +21,14 @@ if(isset($_POST['user_register'])){
      if(!empty($_POST['username']) && !empty($_POST['user_password']) && !empty($_POST['user_email'])){ 
 
         $username   = $_POST['username'];
-        $password   = $_POST['user_password'];
+        $user_password   = $_POST['user_password'];
         $user_email = $_POST['user_email'];
 
 
         // Checking for sql and html injections
         $username   = mysqli_real_escape_string($connection, $username);
         $user_email = mysqli_real_escape_string($connection, $user_email);
-        $user_password   = mysqli_real_escape_string($connection, $password);
+        $user_password   = mysqli_real_escape_string($connection, $user_password);
 
         // Encryption
 
@@ -43,7 +43,7 @@ if(isset($_POST['user_register'])){
         $randSalt = $row['randSalt'];
 
         // Encrypting Password
-        $user_password = crypt($password, $randSalt);
+        $user_password = crypt($user_password, $randSalt);
 
 
         // insert values in DB

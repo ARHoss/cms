@@ -17,7 +17,9 @@
             
              // Retrieving Values from form
             $username = $row['username'];
-            $user_password = $row['user_password'];
+
+            $db_user_password = $row['user_password'];
+            
             $user_firstname = $row['user_firstname'];
             $user_lastname = $row['user_lastname'];
             $user_email = $row['user_email'];
@@ -73,7 +75,7 @@
 
     <div class="form-group">
         <label for="user_password">Password</label>
-        <input value=<?php if(isset($user_password)){echo $user_password;} ?> type="password" class="form-control" name="user_password">
+        <input value=<?php if(isset($db_user_password)){echo $db_user_password;} ?> type="password" class="form-control" name="user_password">
     </div>
 
     <div class="form-group">
@@ -107,7 +109,27 @@
 
         $user_email = $_POST['user_email'];
 
+ //----------------------Encryption-------------------------------------//
         $user_password = $_POST['user_password'];
+
+        if($user_password !== $db_user_password){
+
+        //----------------------Encryption-------------------------------------//
+            // Getting randSalt value
+            $query = "SELECT randSalt FROM users";
+            $select_randSalt_query = mysqli_query($connection, $query);
+            if(!$select_randSalt_query){
+                die("Query failed" . mysqli_error($connection));
+            }
+            $row = mysqli_fetch_assoc($select_randSalt_query);
+            $randSalt = $row['randSalt'];
+            // Encrypting Password
+            $user_password = crypt($user_password, $randSalt);
+
+
+        }
+        //----------------------Encryption-------------------------------------//
+
         
         $user_image = $_FILES['user_image']['name'];
         $user_image_temp = $_FILES['user_image']['tmp_name'];
