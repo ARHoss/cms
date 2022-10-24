@@ -26,9 +26,29 @@ if(isset($_POST['user_register'])){
 
 
     // Checking for sql and html injections
-    echo $username   = mysqli_real_escape_string($connection, $username);
-    echo $password   = mysqli_real_escape_string($connection, $password);
-    echo $user_email = mysqli_real_escape_string($connection, $user_email);
+    $username   = mysqli_real_escape_string($connection, $username);
+    $user_email = mysqli_real_escape_string($connection, $user_email);
+    $password   = mysqli_real_escape_string($connection, $password);
+
+    // Encryption
+
+    // Getting randSalt value
+    $query = "SELECT randSalt FROM users";
+    $select_randSalt_query = mysqli_query($connection, $query);
+
+    if(!$select_randSalt_query){
+        die("Query failed" . mysqli_error($connection));
+    }
+
+    // $password = crypt($password, $hashF_and_salt);
+
+
+
+
+    // $hashF_and_salt = $hashFormat.$salt;
+
+
+
 
 
 
