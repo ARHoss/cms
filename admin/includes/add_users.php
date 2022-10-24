@@ -18,8 +18,8 @@
         $row = mysqli_fetch_assoc($select_randSalt_query);
         $randSalt = $row['randSalt'];
         // Encrypting Password
-        $user_password = crypt($user_password, $randSalt);
-         //----------------------Encryption-------------------------------------//
+        $hashed_password= crypt($user_password, $randSalt);
+        //----------------------Encryption-------------------------------------//
 
 
         
@@ -42,7 +42,7 @@
         user_role) ";
         
         // use '' for strings
-        $query .= "VALUES ('{$username}', '{$user_password}', '{$user_firstname}', '{$user_lastname}',
+        $query .= "VALUES ('{$username}', '{$hashed_password}', '{$user_firstname}', '{$user_lastname}',
          '{$user_email}',now(), '{$user_image}', '{$user_role}' ) ";
 
         $add_user_query = mysqli_query($connection, $query);

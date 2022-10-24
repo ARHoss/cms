@@ -47,14 +47,12 @@
             <?php 
                 if($user_role == "admin"){
 
-                    echo "<option value='admin' selected='selected'>Select Option</option>";
-                    echo "<option value='admin'>Admin</option>";
+                    echo "<option value='admin' selected='selected'>Admin</option>";
                     echo "<option value='subscriber'>Subscriber</option>";
                     
                 }else{
-                    echo "<option value='subscriber' selected='selected'>Select Option</option>";
                     echo "<option value='admin'>Admin</option>";
-                    echo "<option value='subscriber'>Subscriber</option>";
+                    echo "<option value='subscriber' selected='selected'>Subscriber</option>";
 
                 }
             
@@ -109,12 +107,10 @@
 
         $user_email = $_POST['user_email'];
 
- //----------------------Encryption-------------------------------------//
+        //----------------------Encryption-------------------------------------//
         $user_password = $_POST['user_password'];
 
         if($user_password !== $db_user_password){
-
-        //----------------------Encryption-------------------------------------//
             // Getting randSalt value
             $query = "SELECT randSalt FROM users";
             $select_randSalt_query = mysqli_query($connection, $query);
@@ -124,7 +120,7 @@
             $row = mysqli_fetch_assoc($select_randSalt_query);
             $randSalt = $row['randSalt'];
             // Encrypting Password
-            $user_password = crypt($user_password, $randSalt);
+            $hashed_password = crypt($user_password, $randSalt);
 
 
         }
@@ -157,7 +153,7 @@
             }
         }
 
-        $user_update_query = "UPDATE users SET username='$username', user_password='$user_password', user_firstname='$user_firstname', user_lastname='$user_lastname', 
+        $user_update_query = "UPDATE users SET username='$username', user_password='$hashed_password', user_firstname='$user_firstname', user_lastname='$user_lastname', 
         user_email='$user_email', user_image='$user_image', user_role='$user_role' ";
         $user_update_query .= "WHERE user_id = $the_user_id";
 

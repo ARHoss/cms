@@ -43,12 +43,12 @@ if(isset($_POST['user_register'])){
         $randSalt = $row['randSalt'];
 
         // Encrypting Password
-        $user_password = crypt($user_password, $randSalt);
+        $hashed_password = crypt($user_password, $randSalt);
 
 
         // insert values in DB
         $query = "INSERT INTO users(username, user_email, user_password, user_role, user_date_created) ";
-        $query .= "VALUES ('{$username}', '{$user_email}', '{$user_password}', 'subscriber',now() ) ";
+        $query .= "VALUES ('{$username}', '{$user_email}', '{$hashed_password}', 'subscriber',now() ) ";
         $add_new_user_query = mysqli_query($connection, $query);
         if(!$add_new_user_query){
             die("Query failed" . mysqli_error($connection));
