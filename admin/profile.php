@@ -46,7 +46,6 @@
                             $user_firstname = $row['user_firstname'];
                             $user_lastname = $row['user_lastname'];
                             $user_email = $row['user_email'];
-                            $user_role = $row['user_role'];
                             $user_image = $row['user_image'];
 
                             
@@ -54,39 +53,12 @@
 
                     <div class="form-group">
                         <label for="user_firstname">First Name</label>
-                        <input value=<?php if(isset($user_firstname)){echo $user_firstname;} ?> type="text" class="form-control" name="user_firstname">
+                        <input value=<?php if(isset($user_firstname)){echo $user_firstname;}else{echo "NoName";} ?> type="text" class="form-control" name="user_firstname">
                     </div>
 
                     <div class="form-group">
                         <label for="user_lastname">Last Name</label>
-                        <input value=<?php if(isset($user_lastname)){echo $user_lastname;} ?> type="text" class="form-control" name="user_lastname">
-                    </div>
-
-                    <!-- Pupalting user role -->
-                    <div class="form-group">
-                        <label for="user_role">User Role</label>
-                        <select name="user_role" id="user_role">
-
-                            <?php 
-                                if($user_role == "admin"){
-
-                                    echo "<option value='admin' selected='selected'>Admin</option>";
-                                    echo "<option value='subscriber'>Subscriber</option>";
-                                    
-                                }else{
-                                    echo "<option value='admin'>Admin</option>";
-                                    echo "<option value='subscriber' selected='selected'>Subscriber</option>";
-
-                                }
-                            
-                            ?>
-                            
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input value=<?php if(isset($username)){echo $username;} ?> type="text" class="form-control" name="username">
+                        <input value=<?php if(isset($user_lastname)){echo $user_lastname;}else{echo "NoName";} ?> type="text" class="form-control" name="user_lastname">
                     </div>
 
                     <div class="form-group">
@@ -96,7 +68,7 @@
 
                     <div class="form-group">
                         <label for="db_user_password">Password</label>
-                        <input value=<?php if(isset($db_user_password)){echo $db_user_password;} ?> type="password" class="form-control" name="user_password">
+                        <input autocomplete="off" type="password" class="form-control" name="user_password">
                     </div>
 
                     <div class="form-group">
@@ -126,22 +98,18 @@
                             
                             $user_lastname = $_POST['user_lastname'];
                             
-                            $user_role = $_POST['user_role'];
-                        
-                            $username = $_POST['username'];
-
                             $user_email = $_POST['user_email'];
 
                             //----------------------Encryption-------------------------------------//
                             $user_password = $_POST['user_password'];
 
-                            if($user_password !== $db_user_password){
+                            if(!empty($user_password)){
                                
                                 $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
 
 
                             }else{ 
-                                $hashed_password = $user_password;
+                                $hashed_password = $db_user_password;
 
                             }
                             
@@ -174,13 +142,13 @@
                             }
 
                             $user_update_query = "UPDATE users SET username='$username', user_password='$hashed_password', user_firstname='$user_firstname', user_lastname='$user_lastname', 
-                            user_email='$user_email', user_image='$user_image', user_role='$user_role' ";
+                            user_email='$user_email', user_image='$user_image' ";
                             $user_update_query .= "WHERE user_id = $the_user_id";
 
                             $create_user_update_query = mysqli_query($connection, $user_update_query);
 
                             // Refreshes the page after deleteion
-                            header("Location: users.php");
+                            header("Location: index.php");
 
                             // Refreshes the page after deleteion
                             // header("Location: profile.php");

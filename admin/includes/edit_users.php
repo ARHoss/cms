@@ -75,7 +75,7 @@
 
     <div class="form-group">
         <label for="db_user_password">Password</label>
-        <input value=<?php if(isset($db_user_password)){echo $db_user_password;} ?> type="password" class="form-control" name="user_password">
+        <input autocomplete="off" type="password" class="form-control" name="user_password">
     </div>
 
     <div class="form-group">
@@ -112,13 +112,13 @@
         //----------------------Encryption-------------------------------------//
         $user_password = $_POST['user_password'];
 
-        if($user_password !== $db_user_password){
+        if(!empty($user_password)){
             
             $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
 
 
         }else{ 
-            $hashed_password = $user_password;
+            $hashed_password = $db_user_password;
 
         }
         //----------------------Encryption-------------------------------------//
