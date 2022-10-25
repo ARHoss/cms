@@ -18,9 +18,39 @@
                     </h1>
 
                 <!-- Main content of the cms -->
-                <?php   
+                <?php
                 
-                $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                // <!-------------------- Pagination -----------------> 
+                // Getting noumber of posts
+                $count_query = "SELECT * FROM posts";
+                $post_count_query = mysqli_query($connection, $count_query);
+                $post_count = mysqli_num_rows($post_count_query);
+
+                // Calculation to show number of posts
+                $post_count = $post_count/5;
+                $post_count = ceil($post_count);
+                
+
+                // Getting page number
+                if(isset($_GET['page'])){
+
+                    $page = $_GET['page'];
+
+                    
+                }else{
+                    $page = "";
+                }
+
+                if($page == "" || $page == 1){
+                    $page_1 = 0;
+                } else {
+                    $page_1 = ($page * 5) - 5;
+                }
+                
+                
+                
+                // after WHERE we can put LIMIT 3 or LIMIT 0,10 so that only required posts are posted
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1,5";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
@@ -33,11 +63,6 @@
                     $post_status = $row['post_status'];
                     // Shortens the content to 0 to 100 characters
                     $post_content = substr($row['post_content'], 0, 100);
-
-
-
-
-
                     
 
                 ?>
@@ -47,7 +72,7 @@
                     <!-- First Blog Post -->
                     <h2>
                         <!-- Sending post_id to post.php -->
-                        <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_title;?></a>
+                        <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_id;?></a>
                     
                     </h2>
                     <p class="lead">
@@ -91,5 +116,22 @@
         <!-- /.row -->
 
         <hr>
+        
+        <!-------------------- Pagination ----------------->
+        <ul class="pager">
+
+            <?php 
+            
+            for ($i=1; $i <= $post_count; $i++) { 
+                
+                echo "<li><a href='index.php?page=$i'>$i</a></li>";
+
+            }
+                    
+            ?>
+            
+
+
+        </ul>
 
         <?php include "includes/footer.php";?>
