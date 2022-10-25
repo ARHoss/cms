@@ -15,6 +15,7 @@
             <option value='' selected='selected'>Select Options</option>
             <option value='published'>Published</option>
             <option value='draft'>Draft</option>
+            <option value='clone'>Clone</option>
             <option value='delete'>Delete</option>
 
         </select>
@@ -60,7 +61,8 @@
             <!-- Show All Posts Query -->
             <?php   
             
-            $query = "SELECT * FROM posts";
+            // ORDER BY post_id DESC show vaule in descending order
+            $query = "SELECT * FROM posts ORDER BY post_id DESC";
             $select_posts = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_posts)){
@@ -143,6 +145,8 @@
         $bulk_posts_id = $_POST['checkBoxArray'];
         $bulk_post_status = $_POST['bulk_post_status'];
 
+        echo sizeof($bulk_posts_id);
+
         // loop
         foreach ($bulk_posts_id as $checkbox_post_id) {
             
@@ -153,21 +157,54 @@
                     $query = "UPDATE posts SET post_status='$bulk_post_status' ";
                     $query .= "WHERE post_id = $checkbox_post_id";
                     $bulk_update_status_query = mysqli_query($connection, $query);
-                    header("Location: posts.php");
                     break;
 
                 case 'draft':
                     $query = "UPDATE posts SET post_status='$bulk_post_status' ";
                     $query .= "WHERE post_id = $checkbox_post_id";
                     $bulk_update_status_query = mysqli_query($connection, $query);
-                    header("Location: posts.php");
                     break;
 
                 case 'delete':
                     $query = "DELETE FROM posts ";
                     $query .= "WHERE post_id = $checkbox_post_id";
                     $bulk_update_delete_query = mysqli_query($connection, $query);
-                    header("Location: posts.php");
+                    break;
+
+                case 'clone':                        
+                    $query = "SELECT * FROM posts WHERE post_id = $checkbox_post_id";
+                    $clone_post_query = mysqli_query($connection, $query);
+
+
+                    // Fetching one row
+                    $row = mysqli_fetch_assoc($clone_post_query);
+
+                    // Retrieving Values from form
+                    $post_title = $row['post_title'];
+                    $post_category_id = $row['post_category_id'];
+                    $post_author = $row['post_author'];
+                    $post_status = $row['post_status'];
+                    
+                    $post_image = $row['post_image'];                   
+                    $post_tags = $row['post_tags'];
+                    $post_content = $row['post_content'];
+                    $post_comment_count = $row['post_comment_count'];
+                    $post_date = $row['post_date'];
+
+                    // insert values
+                    $query = "INSERT INTO posts(post_category_id, post_title, 
+                    post_author, post_date, post_image, post_content, post_tags, 
+                    post_comment_count, post_status) ";
+                    
+                    // use '' for strings
+                    $query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', '{$post_date}', '{$post_image}',
+                    '{$post_content}', '{$post_tags}', {$post_comment_count}, '{$post_status}' ) ";
+
+                    $create_post_query = mysqli_query($connection, $query);
+                
+
+                    // Checking query 
+                    // confirmQuery($create_post_query);                   
                     break;
     
                 default:
@@ -177,22 +214,14 @@
             }
             
         }
-
-
-
+        header("Location: posts.php"); 
 
 
     }
 
 
+// Delete Query
 
-?>
-
-
-
-
-<!-- Deelete Query -->
-<?php 
 
     if(isset($_GET['delete'])){
 
