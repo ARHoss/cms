@@ -224,10 +224,15 @@
 
 
     if(isset($_GET['delete'])){
+        if(isset($_SESSION['user_role'] )){
+            if($_SESSION['user_role'] === "admin"){
 
 
         // Retreiving data from post
         $the_post_id = $_GET['delete'];
+
+        // Protects from SQL injection
+        $the_post_id = mysqli_real_escape_string($connection, $the_post_id);
 
         $query = "DELETE FROM posts ";
         $query .= "WHERE post_id = $the_post_id";
@@ -236,6 +241,8 @@
 
         // Refresh page
         header("Location: posts.php");
+        }
+    }
         
 }
 
