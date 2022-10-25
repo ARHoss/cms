@@ -31,7 +31,7 @@
                 $post_count = ceil($post_count);
                 
 
-                // Getting page number
+                // Getting post starting number number
                 if(isset($_GET['page'])){
 
                     $page = $_GET['page'];
@@ -49,7 +49,7 @@
                 
                 
                 
-                // after WHERE we can put LIMIT 3 or LIMIT 0,10 so that only required posts are posted
+                // after WHERE we can put LIMIT 3 or LIMIT 0,10 where 0 stands for starting number and 10 stands for the limit
                 $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1,5";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
@@ -124,13 +124,12 @@
             
             for ($i=1; $i <= $post_count; $i++) { 
                 
+                // Printing number of pages
                 echo "<li><a href='index.php?page=$i'>$i</a></li>";
 
             }
                     
             ?>
-            
-
 
         </ul>
 
