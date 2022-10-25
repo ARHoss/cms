@@ -20,20 +20,15 @@
                 <!-- Main content of the cms -->
                 <?php
                 
-                // <!-------------------- Pagination -----------------> 
-                // Getting noumber of posts
-                $count_query = "SELECT * FROM posts";
-                $post_count_query = mysqli_query($connection, $count_query);
-                $post_count = mysqli_num_rows($post_count_query);
-
-                // Calculation to show number of posts
-                $post_count = $post_count/5;
-                $post_count = ceil($post_count);
+                // <!-------------------- Pagination ----------------->
                 
+                // Posts per page
+                $post_per_page = 5;
 
-                // Getting post starting number number
+                // Getting post starting post number
                 if(isset($_GET['page'])){
 
+                    // NUmber of page
                     $page = $_GET['page'];
 
                     
@@ -44,13 +39,25 @@
                 if($page == "" || $page == 1){
                     $page_1 = 0;
                 } else {
-                    $page_1 = ($page * 5) - 5;
+                    $page_1 = ($page * $post_per_page) - $post_per_page;
                 }
+
+                // Getting noumber of posts
+                $count_query = "SELECT * FROM posts";
+                $post_count_query = mysqli_query($connection, $count_query);
+                $post_count = mysqli_num_rows($post_count_query);
+
+                // Calculation to show number of posts
+                $post_count = $post_count/$post_per_page;
+                $post_count = ceil($post_count);
+                // <!-------------------- Pagination ----------------->
+
+                
                 
                 
                 
                 // after WHERE we can put LIMIT 3 or LIMIT 0,10 where 0 stands for starting number and 10 stands for the limit
-                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1,5";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1,$post_per_page";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
@@ -72,7 +79,7 @@
                     <!-- First Blog Post -->
                     <h2>
                         <!-- Sending post_id to post.php -->
-                        <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_id;?></a>
+                        <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_title;?></a>
                     
                     </h2>
                     <p class="lead">
@@ -125,12 +132,19 @@
             for ($i=1; $i <= $post_count; $i++) { 
                 
                 // Printing number of pages
-                echo "<li><a href='index.php?page=$i'>$i</a></li>";
-
+                if($i == $page){
+                    // Printing active page li
+                    // Using style.css
+                    echo "<li class='active_link'><a href='index.php?page=$i'>$i</a></li>";    
+                } else {
+                    echo "<li><a href='index.php?page=$i'>$i</a></li>";
+                }
+                
             }
                     
             ?>
 
         </ul>
+        <!-------------------- Pagination ----------------->
 
         <?php include "includes/footer.php";?>
