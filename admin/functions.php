@@ -25,7 +25,7 @@ function escape($string){
     global $connection;
 
     // Checking for sql and html injections
-    mysqli_real_escape_string($connection, trim($string));
+    return mysqli_real_escape_string($connection, trim($string));
 
 
 }

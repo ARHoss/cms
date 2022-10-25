@@ -73,20 +73,32 @@
 <?php 
 
     if(isset($_GET['delete_user'])){
+        if(isset($_SESSION['user_role'] )){
+            if($_SESSION['user_role'] === "admin"){
+
+                // Retreiving data from post
+                $the_user_id = $_GET['delete_user'];
+
+                // Protects from SQL injection
+                $the_user_id = mysqli_real_escape_string($connection, $the_user_id);
+                
+
+                $query = "DELETE FROM users ";
+                $query .= "WHERE user_id = $the_user_id";
+
+                $delete_user_query = mysqli_query($connection, $query);
 
 
-        // Retreiving data from post
-        $the_user_id = $_GET['delete_user'];
+            }
+
+            // Refresh page
+            header("Location: users.php");
+
         
-
-        $query = "DELETE FROM users ";
-        $query .= "WHERE user_id = $the_user_id";
-
-        $delete_user_query = mysqli_query($connection, $query);
-
-        // Refresh page
-        header("Location: users.php");
-        
+        }
+        else{
+            header("Location: index.php");
+        }    
 }
 
 
