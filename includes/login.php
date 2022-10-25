@@ -35,13 +35,13 @@
         }
 
         //--------------dencrypt the password-----------------------------
+
         // Left is entered password - right password stored in database
-        $user_password = crypt($user_password, $db_user_password);
+        // $user_password = crypt($user_password, $db_user_password);
         //--------------dencrypt the password-----------------------------
 
-        // login check
-        // === check if the variables are exactly identical
-        if($username === $db_username && $user_password === $db_user_password){ // if username and password matches
+        // login check verify function
+        if(password_verify($user_password, $db_user_password)){ // if username and password matches
             
              // setting Session variables
              $_SESSION['id'] = $db_user_id;

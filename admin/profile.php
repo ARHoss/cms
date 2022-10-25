@@ -137,16 +137,14 @@
 
                             if($user_password !== $db_user_password){
                                
-                                // Getting randSalt value
-                                $randSalt = randSalt();
-                                // Encrypting Password
-                                $hashed_password = crypt($user_password, $randSalt);
+                                $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
 
 
                             }else{ 
                                 $hashed_password = $user_password;
 
                             }
+                            
                             //----------------------Encryption-------------------------------------//
                             
                             $user_image = $_FILES['user_image']['name'];

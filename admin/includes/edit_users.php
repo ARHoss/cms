@@ -20,8 +20,10 @@
 
             $db_user_password = $row['user_password'];
             
+            
             $user_firstname = $row['user_firstname'];
             $user_lastname = $row['user_lastname'];
+            
             $user_email = $row['user_email'];
             $user_role = $row['user_role'];
             $user_image = $row['user_image'];
@@ -31,12 +33,12 @@
     
     <div class="form-group">
         <label for="user_firstname">First Name</label>
-        <input value=<?php if(isset($user_firstname)){echo $user_firstname;} ?> type="text" class="form-control" name="user_firstname">
+        <input value=<?php if(isset($user_firstname)){echo $user_firstname;}else{echo "NoName";} ?> type="text" class="form-control" name="user_firstname">
     </div>
 
     <div class="form-group">
         <label for="user_lastname">Last Name</label>
-        <input value=<?php if(isset($user_lastname)){echo $user_lastname;} ?> type="text" class="form-control" name="user_lastname">
+        <input value=<?php if(isset($user_lastname)){echo $user_lastname;}else{echo "NoName";} ?> type="text" class="form-control" name="user_lastname">
     </div>
 
     <!-- Pupalting user role -->
@@ -111,10 +113,8 @@
         $user_password = $_POST['user_password'];
 
         if($user_password !== $db_user_password){
-            // Getting randSalt value
-            $randSalt = randSalt();
-            // Encrypting Password
-            $hashed_password = crypt($user_password, $randSalt);
+            
+            $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
 
 
         }else{ 

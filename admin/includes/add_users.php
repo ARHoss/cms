@@ -6,13 +6,10 @@
         
         // Retrieving Values from form
         $username = $_POST['username'];
+        $user_password = $_POST['user_password'];
 
         //----------------------Encryption-------------------------------------//
-        $user_password = $_POST['user_password'];
-        // Getting randSalt value
-        $randSalt = randSalt();
-        // Encrypting Password
-        $hashed_password= crypt($user_password, $randSalt);
+        $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
         //----------------------Encryption-------------------------------------//
 
 

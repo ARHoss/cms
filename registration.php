@@ -29,12 +29,10 @@ if(isset($_POST['user_register'])){
         $user_email = mysqli_real_escape_string($connection, $user_email);
         $user_password   = mysqli_real_escape_string($connection, $user_password);
 
+        
 
         //----------------------Encrypting Password---------------------
-        // Getting randSalt value
-        $randSalt = randSalt();
-        // Hashing password
-        $hashed_password = crypt($user_password, $randSalt);
+        $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
         //----------------------Encrypting Password---------------------
 
         // insert values in DB
