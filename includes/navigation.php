@@ -68,6 +68,9 @@
                     <!-- Link for registration -->
                     <li><a href="registration.php">Registration</a></li>
 
+                    <!-- Link for contact -->
+                    <li><a href="contact.php">Contact</a></li>
+
                     
                     
                     
