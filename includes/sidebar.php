@@ -22,23 +22,39 @@
 
 <!-- Login -->
 <div class="well">
-    <h4>Log In</h4>
-    <!-- Login Form -->
-    <form action="includes/login.php" method="post">
-    <div class="form-group">
-        <input name="username" type="text" class="form-control" placeholder="Enter Username">
-    </div>
+    <!-----PHP if else statement to show different html code--------->
+    <?php if(isset($_SESSION['user_role'])): ?>
+
+        <h4>Logged in as <?php echo $_SESSION['username'];  ?></h4>
+        <a class="btn btn-primary" href="includes/logout.php">Logout</a>
     
-    <div class="input-group">
-        <input name="user.password" type="password" class="form-control" placeholder="Enter Password">
-        
-        <!-- Login Button -->
-        <!-- Keeps butt on the same line with span -->
-        <span class="input-group-btn"> 
-            <button class="btn btn-primary" name="login" type="submit">Login</button>
-        </span>
-    </div>
-    </form> 
+        <?php else: ?>
+
+            <h4>Log In</h4>
+            <!-- Login Form -->
+            <form action="includes/login.php" method="post">
+            
+            <div class="form-group">
+                <input name="username" type="text" class="form-control" placeholder="Enter Username">
+            </div>
+            
+            <div class="input-group">
+                <input name="user.password" type="password" class="form-control" placeholder="Enter Password">
+                
+                <!-- Login Button -->
+                <!-- Keeps butt on the same line with span -->
+                <span class="input-group-btn"> 
+                    <button class="btn btn-primary" name="login" type="submit">Login</button>
+                
+                </span>
+            </div>
+            
+        </form> 
+    
+            <?php endif; ?>
+    
+
+
     <!-- /.input-group -->
 </div>
 <!-- Login Ends-->
