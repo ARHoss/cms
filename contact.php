@@ -20,12 +20,12 @@ if(isset($_POST['send_email'])){
 
      if(!empty($_POST['user_email']) && !empty($_POST['user_subject']) && !empty($_POST['user_message'])){ 
 
+        // This field needs to be hardcoded
         $to   = "raufhossain2010@gmail.com";
+
         $subject   = $_POST['user_subject'];
         $header = "From: ".$_POST['user_email'];
         $message = $_POST['user_message'];
-
-
 
         // the message
         // $msg = "First line of text\nSecond line of text";
@@ -35,16 +35,12 @@ if(isset($_POST['send_email'])){
 
         // send email
         mail($to,$subject,$message, $header);
-        
-
-       
-
-
-        $message = "Your Email Has Been Sent";
+               
+        $message = "Your Email has been sent";
 
     } else{
 
-        $message = "Fields Cannot Be Empty";
+        $message = "Fields cannot be empty";
 
     }
 
