@@ -28,7 +28,30 @@
                     while($row = mysqli_fetch_assoc($select_all_categories_query)){
                         
                         $cat_title = $row['cat_title'];
-                        echo "<li><a href='#'>{$cat_title}</a></li>";
+                        $cat_id = $row['cat_id'];
+
+                        //------------Active Navigation Link code-----------
+                        $category_class = '';
+                        $registration_class = '';
+                        $contact_class = '';
+
+                        
+                        // basename - provides us the name of current page
+                        $pageName = basename($_SERVER['PHP_SELF']);
+                        $registration = 'registration.php';
+                        $contact = "contact.php";
+
+                        if(isset($_GET['category']) && $_GET['category'] == $cat_id){
+
+                            $category_class = 'active';
+                            
+                        }else if($pageName == $registration) {
+                            $registration_class = 'active';
+                        }else if ($pageName == $contact){
+                            $contact_class = 'active';
+                        }
+                        
+                        echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
                         
                     }
         
@@ -56,7 +79,7 @@
                                     if(isset($_GET['p_id'])){
                                         
                                         $post_id= $_GET['p_id'];
-                                        echo "<td><a href=admin/posts.php?source=edit_posts&p_id=$post_id>Edit Post</a></td>";
+                                        echo "<a href=admin/posts.php?source=edit_posts&p_id=$post_id>Edit Post</a>";
                                     }
                                 }
                             }
@@ -66,10 +89,10 @@
                     </li>
 
                     <!-- Link for registration -->
-                    <li><a href="registration.php">Registration</a></li>
+                    <li class="<?php echo $registration_class;?>"><a href="registration.php">Registration</a></li>
 
                     <!-- Link for contact -->
-                    <li><a href="contact.php">Contact</a></li>
+                    <li class="<?php echo $contact_class;?>" ><a href="contact.php">Contact</a></li>
 
                     
                     
