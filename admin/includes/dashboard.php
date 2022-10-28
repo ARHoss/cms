@@ -115,22 +115,13 @@
 
 
 // Google Chart Variables
-$query = "SELECT * FROM posts WHERE post_status = 'published'";
-$select_all_published_posts_query = mysqli_query($connection, $query);
-$published_post_counts = mysqli_num_rows($select_all_published_posts_query);
-
+$published_post_counts = checkStatus("posts", "post_status", "published");
 // Draft posts count
-$query = "SELECT * FROM posts WHERE post_status = 'draft'";
-$select_all_draft_posts_query = mysqli_query($connection, $query);
-$draft_post_counts = mysqli_num_rows($select_all_draft_posts_query);
+$draft_post_counts = checkStatus("posts", "post_status", "draft");
 // Unapproved comments count
-$query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
-$select_all_unapproved_comments_query = mysqli_query($connection, $query);
-$unapproved_comment_counts = mysqli_num_rows($select_all_unapproved_comments_query);
+$unapproved_comment_counts = checkStatus("comments", "comment_status", "unapproved");
 // Subscriber Users
-$query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-$select_all_subscriber_user_query = mysqli_query($connection, $query);
-$subscriber_user_counts = mysqli_num_rows($select_all_subscriber_user_query);
+$subscriber_user_counts = checkStatus("users", "user_role", "subscriber");
 
 
 ?>

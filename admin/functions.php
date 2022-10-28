@@ -1,6 +1,6 @@
 <?php 
 
-
+// DB All Data Query returning number of rows
 function recordCount($table){
 
     global $connection;
@@ -8,6 +8,17 @@ function recordCount($table){
     $result = mysqli_query($connection, $query);
     
     return mysqli_num_rows($result);
+
+}
+
+// DB Where Query returning number of rows
+function checkStatus($table, $table_column, $value){
+
+    global $connection;
+    $query = "SELECT * FROM $table WHERE $table_column = '$value'";
+    $select_all_published_posts_query = mysqli_query($connection, $query);
+    return mysqli_num_rows($select_all_published_posts_query);
+
 
 }
 
