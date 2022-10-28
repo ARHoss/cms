@@ -1,6 +1,22 @@
 <?php 
 
 
+function recordCount($table){
+
+    global $connection;
+    $query = "SELECT * FROM ".$table;
+    $result = mysqli_query($connection, $query);
+    
+    return mysqli_num_rows($result);
+
+}
+
+function test(){
+    echo "test";
+    print_console("test");
+}
+
+
 function randSalt(){
 
     global $connection;
@@ -31,7 +47,7 @@ function escape($string){
 }
 
 // Prints in Console Port
-function console_print($data) {
+function print_console($data) {
     
     if (is_array($data)){
         $output = implode(',', $data);

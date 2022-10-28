@@ -11,11 +11,7 @@
                     <div class="col-xs-9 text-right">
                         <!-- Dynamic data -->
                 <?php 
-                
-                $query = "SELECT * FROM posts";
-                $post_counts_query = mysqli_query($connection, $query);
-                $post_counts = mysqli_num_rows($post_counts_query);
-
+                $post_counts = recordCount("posts");
                 echo "<div class='huge'>{$post_counts}</div>"
                 ?> 
                         <div>Posts</div>
@@ -42,11 +38,7 @@
                     <div class="col-xs-9 text-right">
                         <!-- Dynamic data -->
                         <?php 
-                
-                        $query = "SELECT * FROM comments";
-                        $comment_counts_query = mysqli_query($connection, $query);
-                        $comment_counts = mysqli_num_rows($comment_counts_query);
-
+                        $comment_counts = recordCount("comments");
                         echo "<div class='huge'>{$comment_counts}</div>"
                         ?> 
                     <div>Comments</div>
@@ -73,11 +65,7 @@
                     <div class="col-xs-9 text-right">
                         <!-- Dynamic data -->
                         <?php 
-                
-                        $query = "SELECT * FROM users";
-                        $user_counts_query = mysqli_query($connection, $query);
-                        $user_counts = mysqli_num_rows($user_counts_query);
-
+                        $user_counts = recordCount("users");
                         echo "<div class='huge'>{$user_counts}</div>"
                         ?> 
                         <div> Users</div>
@@ -104,11 +92,7 @@
                     <div class="col-xs-9 text-right">
                         <!-- Dynamic data -->
                         <?php 
-                
-                        $query = "SELECT * FROM categories";
-                        $category_counts_query = mysqli_query($connection, $query);
-                        $category_counts = mysqli_num_rows($category_counts_query);
-
+                        $category_counts = recordCount("categories");
                         echo "<div class='huge'>{$category_counts}</div>"
                         ?>  
                         <div>Categories</div>
