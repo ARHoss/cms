@@ -42,7 +42,7 @@
 
         // login check verify function
         // Redirects user to admin or index depending on role
-        if(password_verify($user_password, $db_user_password)){ // if username and password matches
+        if(isset($db_user_password) && password_verify($user_password, $db_user_password)){ // if username and password matches
             
              // setting Session variables
              $_SESSION['id'] = $db_user_id;
@@ -50,11 +50,10 @@
              $_SESSION['firstname'] = $db_user_firstname;
              $_SESSION['lastname'] = $db_user_lastname;
              $_SESSION['user_role'] = $db_user_role;
+
+             header("Location: ../index.php");
                        
-             if($db_user_role == "admin") {
-                header("Location: ../admin");
-            }
-             else { // anything else
+        }else { // anything else
 
                 header("Location: ../index.php");
                 
@@ -62,9 +61,6 @@
              
             
         }
-
-
-    }
 
 
 ?>
