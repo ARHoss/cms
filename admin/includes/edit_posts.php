@@ -109,26 +109,36 @@
         <input value=<?php if(isset($post_title)){echo $post_title;} ?> type="text" class="form-control" name="post_title">
     </div>
 
-    <!-- Populate select field-->
+    <!-- Populate category field-->
     <div class="form-group">
             <label for="category_title">Category</label>
             <select name="post_category_id" id="post_category_id">
 
             <?php 
             
+            // Printing rest of the category
             $query = "SELECT * FROM categories";
             $select_categories = mysqli_query($connection, $query);
 
             while($row = mysqli_fetch_assoc($select_categories)){
-                
+
                 $cat_id = $row['cat_id'];
                 $cat_title = $row['cat_title'];
+                
+                if($post_category_id !== $cat_id){
+
+                    echo "<option value=$cat_id>$cat_title</option>";
+                } else{
+                    // The selected option choose the current category
+                    echo "<option selected value=$cat_id>$cat_title</option>";
+                }
+            }
 
             ?>
 
-                <option value=<?php if(isset($cat_id)){echo $cat_id;} ?>><?php echo $cat_title;?></option>
+
             
-            <?php }  ?>
+
             
             </select>
 
