@@ -1,30 +1,30 @@
 <?php 
-
+    // Clean SQL injection
     if(isset($_POST['update_post'])){
             
         // Retrieving Values from form
-        $the_post_id = $_GET['p_id'];
+        escape($the_post_id = $_GET['p_id']); 
         // echo $the_post_id;
-        $post_title = $_POST['post_title'];
+        escape($post_title = $_POST['post_title']);
         // echo $post_category_id;
         
-        $post_category_id = $_POST['post_category_id'];
+        escape($post_category_id = $_POST['post_category_id']); 
         // echo $post_category_id;
         
-        $post_author = $_POST['post_author'];
+        escape($post_author = $_POST['post_author']); 
         // echo $post_author;
 
-        $post_status = $_POST['post_status'];
+        escape($post_status = $_POST['post_status']);
         // echo $post_status;
         
         $post_image = $_FILES['post_image']['name'];
         $post_image_temp = $_FILES['post_image']['tmp_name'];
         
         
-        $post_tags = $_POST['post_tags'];
-        $post_content = $_POST['post_content'];
-        $post_comment_count = 4;
-        $post_date = date('d-m-y');
+        escape($post_tags = $_POST['post_tags']);
+        escape($post_content = $_POST['post_content']);
+        escape($post_comment_count = 4);
+        escape($post_date = date('d-m-y'));
 
         // Function for images
         // if it does not work provide permsission to the folder to everyone
@@ -79,11 +79,13 @@
 
 
 <!-- enctype is resposible for sending different form data -->
+<!-- Clean SQL injection -->
 <form action="" method="post" enctype="multipart/form-data">
 
     <?php 
 
     $the_post_id = $_GET['p_id'];
+    escape($the_post_id);
 
     $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
     $edit_query = mysqli_query($connection, $query);
