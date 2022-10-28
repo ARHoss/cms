@@ -41,6 +41,7 @@
         //--------------dencrypt the password-----------------------------
 
         // login check verify function
+        // Redirects user to admin or index depending on role
         if(password_verify($user_password, $db_user_password)){ // if username and password matches
             
              // setting Session variables
@@ -50,11 +51,15 @@
              $_SESSION['lastname'] = $db_user_lastname;
              $_SESSION['user_role'] = $db_user_role;
                        
-             header("Location: ../admin");
-            
-        }else { // anything else
+             if($db_user_role == "admin") {
+                header("Location: ../admin");
+            }
+             else { // anything else
 
-            header("Location: ../index.php");
+                header("Location: ../index.php");
+                
+            }
+             
             
         }
 
