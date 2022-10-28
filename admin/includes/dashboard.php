@@ -122,6 +122,8 @@ $draft_post_counts = checkStatus("posts", "post_status", "draft");
 $unapproved_comment_counts = checkStatus("comments", "comment_status", "unapproved");
 // Subscriber Users
 $subscriber_user_counts = checkStatus("users", "user_role", "subscriber");
+// Admin Users
+$admin_user_counts = checkStatus("users", "user_role", "admin");
 
 
 ?>
@@ -142,10 +144,12 @@ $subscriber_user_counts = checkStatus("users", "user_role", "subscriber");
             <?php
             
 
-                $element_texts =['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscriber', 'Categories'];
-                $element_counts =[$post_counts, $published_post_counts, $draft_post_counts, $comment_counts, $unapproved_comment_counts,$user_counts, $subscriber_user_counts, $category_counts];
+                $element_texts =['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscriber', 'Admin', 'Categories'];
+                $element_counts =[$post_counts, $published_post_counts, $draft_post_counts, $comment_counts, $unapproved_comment_counts,$user_counts, $subscriber_user_counts, $admin_user_counts, $category_counts];
                 
-                for ($i=0; $i < 8; $i++) { 
+                $count = count($element_counts);
+
+                for ($i=0; $i < $count; $i++) { 
                 # code... - replicating this data below -> 
                 // ['Posts', 1000]
                 // ['Posts', 1000],
