@@ -100,8 +100,41 @@
                 
 
                 </ul>
+               
+                <!-- Logout Nav bar when user logged in -->
+                <?php if(isset($_SESSION['user_role'])): ?>
+                <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['firstname'];  ?> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <!-- <li>
+                                    <a href="admin/profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                </li> -->
+
+                                <!-- Inbox for emails - not required -->
+                                <!-- <li>
+                                    <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                                </li> -->
+
+                                <!-- Settings - not required -->
+                                <!-- <li>
+                                    <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                                </li> -->
+
+
+                                <!-- <li class="divider"></li> -->
+                                <li>
+                                    <a class="btn btn-primary btn-lg active" href="includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                </ul>
+                <?php endif; ?>
+
             </div>
             <!-- /.navbar-collapse -->
+            
 
         </div>
         <!-- /.container -->
