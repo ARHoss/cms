@@ -37,7 +37,7 @@ if(isset($_POST['user_register'])){
 
         // insert values in DB
         $query = "INSERT INTO users(username, user_email, user_password, user_role, user_date_created) ";
-        $query .= "VALUES ('{$username}', '{$user_email}', '{$hashed_password}', 'admin',now() ) ";
+        $query .= "VALUES ('{$username}', '{$user_email}', '{$hashed_password}', 'subscriber',now() ) ";
         $add_new_user_query = mysqli_query($connection, $query);
         if(!$add_new_user_query){
             die("Query failed" . mysqli_error($connection));
@@ -45,6 +45,27 @@ if(isset($_POST['user_register'])){
 
 
         $message = "Your Registration has been submitted";
+
+        // Send email for approving registration
+        
+        // This field needs to be hardcoded
+        $to   = "raufhossain2010@gmail.com";
+        $subject   = "Alhamdulillah New Visitor";
+        $email_message = "Please approve as Admin";
+        
+        // User email
+        $header = "From: ".$user_email;
+
+
+        if($_SERVER['HTTP_HOST'] !== 'localhost'){
+
+            // send email
+            mail($to,$subject,$email_message, $header);
+
+        }
+
+
+
 
     } else{
 
