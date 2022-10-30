@@ -1,6 +1,6 @@
 <?php 
 
-// DB All Data Query returning number of rows
+// DB Query using All Data and returning number of rows
 function recordCount($table){
 
     global $connection;
@@ -11,7 +11,7 @@ function recordCount($table){
 
 }
 
-// DB Where Query returning number of rows
+// DB Query using WHERE and returning number of rows
 function checkStatus($table, $table_column, $value){
 
     global $connection;
@@ -22,10 +22,6 @@ function checkStatus($table, $table_column, $value){
 
 }
 
-function test(){
-    echo "test";
-    print_console("test");
-}
 
 
 function randSalt(){
@@ -166,21 +162,39 @@ function deleteCategories(){
         
 
     }
+}
 
-    function confirmQuery($result){
+function confirmQuery($result){
 
-        // Must for function
-        global $connection;
+    // Must for function
+    global $connection;
 
-        if(!$result){
-            die('Query Failed'.mysqli_error($connection));
-        }
-
+    if(!$result){
+        die('Query Failed'.mysqli_error($connection));
     }
 
+}
 
 
 
+// Admin new section
+
+function is_standard($username){
+
+    // Must for function
+    global $connection;
+    
+    $query = "SELECT user_role FROM users WHERE username = '$username' ";
+    $user_role_query = mysqli_query($connection, $query);
+    confirmQuery($user_role_query);
+    $row = mysqli_fetch_assoc($user_role_query);
+
+    if($row['user_role'] === "standard"){
+        return true;
+    }else{
+        return false;
+    }
+    
 }
 
 

@@ -47,18 +47,20 @@
         <select name="user_role" id="user_role">
 
             <?php 
-                if($user_role == "admin"){
-
-                    echo "<option value='admin' selected='selected'>Admin</option>";
-                    echo "<option value='subscriber'>Subscriber</option>";
+                if(isset($user_role)){
                     
-                }else{
-                    echo "<option value='admin'>Admin</option>";
-                    echo "<option value='subscriber' selected='selected'>Subscriber</option>";
+                    // Capitalizing the first letter
+                    $role = ucfirst($user_role);
 
+                    echo "<option value='$user_role' selected='selected'>$role</option>";
+                    if($user_role !== "admin"){echo "<option value='admin'>Admin</option>";}
+                    if($user_role !== "standard"){echo "<option value='standard'>Standard</option>";}
+                    if($user_role !== "subscriber"){echo "<option value='subscriber'>Subscriber</option>";}
+                    
                 }
-            
             ?>
+
+            
              
         </select>
    </div>

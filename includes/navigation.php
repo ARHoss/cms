@@ -59,9 +59,9 @@
                     ?>
                     <li>
                         <?php  
-                        
+                            // Only subscriber are not allowed to have this tab
                             if(isset($_SESSION['user_role'])){
-                                if($_SESSION['user_role'] === "admin"){
+                                if($_SESSION['user_role'] !== "subscriber"){
                                     echo "<a href='admin'>Admin</a>";
                                 }
                             }

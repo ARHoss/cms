@@ -78,6 +78,7 @@
 
             <option value="subscriber">Select Option</option>
             <option value="admin">Admin</option>
+            <option value="standard">Standard</option>
             <option value="subscriber">Subscriber</option>
 
         </select>

@@ -15,7 +15,8 @@
     if(!isset($_SESSION['user_role'])){ // Block users who do not have right credentials
 
         header("Location: ../index.php");
-    }else if(isset($_SESSION['user_role'])){ // Block users who do not have admin rights
+    }
+    else if(isset($_SESSION['user_role'])){ // Block all subscribers
 
         if($_SESSION['user_role'] == "subscriber"){
 
