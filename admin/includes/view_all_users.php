@@ -72,35 +72,29 @@
 <!-- Delete User Query -->
 <?php 
 
-    if(isset($_GET['delete_user'])){
-        if(isset($_SESSION['user_role'] )){
-            if($_SESSION['user_role'] === "admin"){
+if(isset($_GET['delete_user'])){
+    if(isset($_SESSION['user_role'] )){
+        if($_SESSION['user_role'] === "admin"){
 
-                // Retreiving data from post
-                $the_user_id = $_GET['delete_user'];
+            // Retreiving data from post
+            $the_user_id = $_GET['delete_user'];
 
-                // Protects from SQL injection
-                $the_user_id = mysqli_real_escape_string($connection, $the_user_id);
-                
+            // Protects from SQL injection
+            $the_user_id = mysqli_real_escape_string($connection, $the_user_id);
+            
 
-                $query = "DELETE FROM users ";
-                $query .= "WHERE user_id = $the_user_id";
+            $query = "DELETE FROM users ";
+            $query .= "WHERE user_id = $the_user_id";
 
-                $delete_user_query = mysqli_query($connection, $query);
-
-
-            }
+            $delete_user_query = mysqli_query($connection, $query);
 
             // Refresh page
             header("Location: users.php");
 
-        
-        }
-        else{
-            header("Location: index.php");
-        }    
-}
 
+        }
+    } 
+}
 
 ?>
 <!-- Deelete Query Ends-->
@@ -111,36 +105,41 @@
 
 // change_to_admin query 
 if(isset($_GET['change_to_admin'])){
+    if(isset($_SESSION['user_role'] )){
+        if($_SESSION['user_role'] === "admin"){
 
+            // Retreiving data from post
+            $the_user_id = $_GET['change_to_admin'];
 
-    // Retreiving data from post
-    $the_user_id = $_GET['change_to_admin'];
+            $query = "UPDATE users SET user_role ='admin' ";
+            $query .= "WHERE user_id = $the_user_id";
 
-    $query = "UPDATE users SET user_role ='admin' ";
-    $query .= "WHERE user_id = $the_user_id";
+            $change_to_admin_query = mysqli_query($connection, $query);
 
-    $change_to_admin_query = mysqli_query($connection, $query);
-
-    // Refresh page
-    header("Location: users.php");
+            // Refresh page
+            header("Location: users.php");
+        } 
+    }
     
 }
 
 // change_to_subscriber query 
 if(isset($_GET['change_to_sub'])){
+    if(isset($_SESSION['user_role'] )){
+        if($_SESSION['user_role'] === "admin"){
 
+            // Retreiving data from post
+            $the_user_id = $_GET['change_to_sub'];
 
-    // Retreiving data from post
-    $the_user_id = $_GET['change_to_sub'];
+            $query = "UPDATE users SET user_role ='subscriber' ";
+            $query .= "WHERE user_id = $the_user_id";
 
-    $query = "UPDATE users SET user_role ='subscriber' ";
-    $query .= "WHERE user_id = $the_user_id";
+            $change_to_sub_query = mysqli_query($connection, $query);
 
-    $change_to_sub_query = mysqli_query($connection, $query);
-
-    // Refresh page
-    header("Location: users.php");
-    
+            // Refresh page
+            header("Location: users.php");
+        }
+    }
 }
 
 ?>

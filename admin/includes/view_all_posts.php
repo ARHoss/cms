@@ -61,8 +61,13 @@
             <!-- Show All Posts Query -->
             <?php   
             
+            // Single query joining 2 tables
             // ORDER BY post_id DESC show vaule in descending order
-            $query = "SELECT * FROM posts ORDER BY post_id DESC";
+            $query = "SELECT posts.post_id, posts.post_author, posts.post_title, posts.post_category_id, posts.post_status,  posts.post_image,  posts.post_tags,  posts.post_comment_count,  posts.post_date, ";
+            $query .= "categories.cat_id, categories.cat_title ";
+            $query .= "FROM posts ";
+            $query .= "LEFT JOIN categories ON post_category_id = categories.cat_id ";
+            $query .= "ORDER BY posts.post_id DESC";
             $select_posts = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_posts)){
@@ -76,6 +81,9 @@
                     $post_tags = $row['post_tags'];
                     $post_comment_count = $row['post_comment_count'];
                     $post_date = $row['post_date'];
+
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
 
             
                     echo "<tr>";
@@ -98,18 +106,12 @@
                     //link to see individual post
                     echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
 
-
-                    // Populating category title from category table
-                    $query = "SELECT * FROM categories WHERE cat_id={$post_category_id}";
-                    $select_categories = mysqli_query($connection, $query);
-                    while($row = mysqli_fetch_assoc($select_categories)){
-                        $cat_title = $row['cat_title'];
-                    echo "<td>{$cat_title}</td>";
-                    }
-                    
+                    echo "<td>{$cat_title}</td>";                   
                     echo "<td>{$post_status}</td>";
+                    
                     // Showing image
                     echo "<td><img width='100' src='../images/$post_image' alt='image' ></td>";
+                    
                     echo "<td>{$post_tags}</td>";
                     echo "<td>{$post_comment_count}</td>";
                     echo "<td>{$post_date}</td>";
