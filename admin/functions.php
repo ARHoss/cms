@@ -324,6 +324,7 @@ function login_user($username, $user_password){
                    
     }else { // anything else
             //  Redirects to root and then to the page
+            $_SESSION['message'] = "Wrong Username or Password";
             redirect("/cms/index.php");
             
         }
@@ -331,6 +332,8 @@ function login_user($username, $user_password){
 
 
 }
+
+ 
 
 
 

@@ -35,7 +35,7 @@
             <form action="includes/login.php" method="post">
             
             <div class="form-group">
-                <input name="username" type="text" class="form-control" placeholder="Enter Username">
+                <input name="username" type="text" class="form-control" placeholder="Enter Username" autocomplete="on">
             </div>
             
             <div class="input-group">
@@ -45,9 +45,15 @@
                 <!-- Keeps butt on the same line with span -->
                 <span class="input-group-btn"> 
                     <button class="btn btn-primary" name="login" type="submit">Login</button>
-                
                 </span>
             </div>
+            <!-- Error report for wrong username or password -->
+            <p class="text-danger">
+                <?php 
+                    echo $_SESSION['message'];  
+                    $_SESSION['message'] = null;
+                ?> 
+            </p>
             
         </form> 
     
