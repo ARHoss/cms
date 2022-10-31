@@ -103,7 +103,12 @@
                     <li class="">
                         <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
                     </li>
-
+                    
+                    <!-- Showing Edit User tab only when the user role is admin -->
+                    <?php 
+                    if(isset($_SESSION['user_role'])){
+                        if($_SESSION['user_role'] === "admin"){
+                    ?>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
@@ -115,7 +120,10 @@
                             </li>
                         </ul>
                     </li>
-
+                    <?php 
+                        }
+                    }         
+                    ?>
                     
                     <li>
                         <a href="profile.php"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
