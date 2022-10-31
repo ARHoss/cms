@@ -117,17 +117,23 @@
                     echo "<td>{$post_date}</td>";
 
                     //View post link
-                    echo "<td><a href=../post.php?p_id=$post_id>View Post</a></td>";
+                    echo "<td><a class='btn btn-primary' href=../post.php?p_id=$post_id>View Post</a></td>";
 
                     //Edit post link
-                    echo "<td><a href=posts.php?source=edit_posts&p_id=$post_id>Edit</a></td>";
-
-                    //Delete post link
+                    echo "<td><a class='btn btn-info' href=posts.php?source=edit_posts&p_id=$post_id>Edit</a></td>";
+            ?>
+                    <!-- //Delete post link
                     // Using JS to confirm deletion
-                    // confirm() is a function
-                    echo "<td><a href=posts.php?delete=$post_id onClick=\"javascript: return confirm('Are you sure you want to delete')\">Delete</a></td>";
+                    // confirm() is a function -->
+                    <!-- echo "<td><a href=posts.php?delete=$post_id onClick=\"javascript: return confirm('Are you sure you want to delete')\">Delete</a></td>"; -->
 
-                                                                            
+                    <!-- Delete Button -->
+                    <form action="" method="post">
+                        <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                        <td><input class="btn btn-danger" type="submit" value="Delete" name="delete"></td>
+                    </form>
+
+            <?php                              
                     echo "</tr>";
                 }
             
@@ -225,24 +231,24 @@
 // Delete Query
 
 
-    if(isset($_GET['delete'])){
-        if(isset($_SESSION['user_role'] )){
-            if($_SESSION['user_role'] === "admin"){
+if(isset($_POST['delete'])){
+    if(isset($_SESSION['user_role'] )){
+        if($_SESSION['user_role'] === "admin"){
 
 
-        // Retreiving data from post
-        $the_post_id = $_GET['delete'];
+            // Retreiving data from post
+            $the_post_id = $_POST['post_id'];
 
-        // Protects from SQL injection
-        $the_post_id = mysqli_real_escape_string($connection, $the_post_id);
+            // Protects from SQL injection
+            $the_post_id = escape($the_post_id);
 
-        $query = "DELETE FROM posts ";
-        $query .= "WHERE post_id = $the_post_id";
+            $query = "DELETE FROM posts ";
+            $query .= "WHERE post_id = $the_post_id";
 
-        $delete_query = mysqli_query($connection, $query);
+            $delete_query = mysqli_query($connection, $query);
 
-        // Refresh page
-        header("Location: posts.php");
+            // Refresh page
+            header("Location: posts.php");
         }
     }
         
