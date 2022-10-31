@@ -5,8 +5,8 @@
 <!-- Do not allow standard users to access this page -->
 <?php  
 
-    if(is_standard($_SESSION['username'])){
-        header("Location: index.php");
+    if(isStandardUser() || isSubscriberUser()){
+        redirect("index.php");
     }
 
 ?>

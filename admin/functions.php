@@ -179,17 +179,32 @@ function confirmQuery($result){
 
 // Admin new section
 
-function is_standard($username){
+function isAdminUser(){
 
-    // Must for function
-    global $connection;
     
-    $query = "SELECT user_role FROM users WHERE username = '$username' ";
-    $user_role_query = mysqli_query($connection, $query);
-    confirmQuery($user_role_query);
-    $row = mysqli_fetch_assoc($user_role_query);
+    if($_SESSION['user_role'] === "admin"){
+        return true;
+    }else{
+        return false;
+    }
+    
+}
 
-    if($row['user_role'] === "standard"){
+function isStandardUser(){
+
+    
+    if($_SESSION['user_role'] === "standard"){
+        return true;
+    }else{
+        return false;
+    }
+    
+}
+
+function isSubscriberUser(){
+
+    
+    if($_SESSION['user_role'] === "subscriber"){
         return true;
     }else{
         return false;
@@ -348,6 +363,19 @@ function isLoggedIn(){
 
 }
 
+function isLoggedOut(){
+
+    if(!isset($_SESSION['user_role'])){
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+
 function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
 
     if(isLoggedIn()){
@@ -362,6 +390,11 @@ function redirect($location){
     
     // Exits and does not return anything
     exit;
+}
+
+function currentPage(){
+    // basename - provides us the name of current page
+    return basename($_SERVER['PHP_SELF']);
 }
 
  

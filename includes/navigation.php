@@ -34,22 +34,51 @@
                         $category_class = '';
                         $registration_class = '';
                         $contact_class = '';
+                        $login_class = '';
 
                         
-                        // basename - provides us the name of current page
-                        $pageName = basename($_SERVER['PHP_SELF']);
-                        $registration = 'registration.php';
-                        $contact = "contact.php";
+                        // function for current page
+                        $pageName = currentPage();
 
                         if(isset($_GET['category']) && $_GET['category'] == $cat_id){
 
                             $category_class = 'active';
                             
-                        }else if($pageName == $registration) {
-                            $registration_class = 'active';
-                        }else if ($pageName == $contact){
-                            $contact_class = 'active';
-                        }
+                        }else{
+                            if(isset($pageName)){
+                                switch ($pageName) {
+                                
+                                    case 'registration.php':
+                                        # code...
+                                        $registration_class = 'active';
+                                        break;
+                                    
+                                    case 'contact.php':
+                                        # code...
+                                        $contact_class = 'active';
+                                        break;
+                                    
+                                    case 'login.php':
+                                        # code...
+                                        $login_class = 'active';
+                                        break;
+                                
+                                    default:
+                                        # code...
+                                        break;
+                                }
+                            }
+                            
+                        } 
+                        
+                        
+                        
+                        
+                        // if($pageName == $registration) {
+                        //     $registration_class = 'active';
+                        // }else if ($pageName == $contact){
+                        //     $contact_class = 'active';
+                        // }
                         
                         echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
                         
@@ -60,8 +89,8 @@
                     <li>
                         <?php  
                             // Only subscriber are not allowed to have this tab
-                            if(isset($_SESSION['user_role'])){
-                                if($_SESSION['user_role'] !== "subscriber"){
+                            if(isLoggedIn()){
+                                if(isAdminUser() || isStandardUser()){
                                     echo "<a href='admin'>Admin</a>";
                                 }
                             }
@@ -74,14 +103,12 @@
                     <li>
                         <?php 
                         
-                            if(isset($_SESSION['user_role'])){
-                                if($_SESSION['user_role'] === "admin"){    
-                                    if(isset($_GET['p_id'])){
-                                        
-                                        $post_id= $_GET['p_id'];
-                                        echo "<a href=admin/posts.php?source=edit_posts&p_id=$post_id>Edit Post</a>";
-                                    }
-                                }
+                            if(isLoggedIn() && isAdminUser()){  
+                                if(isset($_GET['p_id'])){
+                                    
+                                    $post_id= $_GET['p_id'];
+                                    echo "<a class='btn btn-primary' href=admin/posts.php?source=edit_posts&p_id=$post_id>Edit Post</a>";
+                                }                               
                             }
                                 
                             
@@ -89,20 +116,20 @@
                     </li>
 
                     <!-- Link for registration -->
-                    <li class="<?php echo $registration_class;?>"><a href="registration.php">Registration</a></li>
+                    <?php if(isLoggedOut()){echo "<li class='$registration_class'><a href=registration.php>Registration</a></li>";} ?>
 
                     <!-- Link for contact -->
                     <li class="<?php echo $contact_class;?>" ><a href="contact.php">Contact</a></li>
-
-                    
-                    
-                    
-                
+                                                    
+                    <!-- Link for login -->
+                    <?php if(isLoggedOut()){echo "<li class='$login_class'><a href=login.php>Login</a></li>";} ?>
+                                                                 
 
                 </ul>
+                
                
                 <!-- Logout Nav bar when user logged in -->
-                <?php if(isset($_SESSION['user_role'])): ?>
+                <?php if(isLoggedIn()): ?>
                 <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['firstname'];  ?> <b class="caret"></b></a>

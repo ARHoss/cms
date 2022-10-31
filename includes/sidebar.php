@@ -32,7 +32,7 @@
 
             <h4>Log In</h4>
             <!-- Login Form -->
-            <form action="includes/login.php" method="post">
+            <form action="login.php" method="post">
             
             <div class="form-group">
                 <input name="username" type="text" class="form-control" placeholder="Enter Username" autocomplete="on">
