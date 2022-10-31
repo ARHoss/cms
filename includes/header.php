@@ -2,6 +2,8 @@
 <!-- Output buffer -->
 <?php ob_start(); ?>
 <?php session_start(); ?>
+<?php include "admin/functions.php";  ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

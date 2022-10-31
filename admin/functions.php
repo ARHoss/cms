@@ -197,6 +197,141 @@ function is_standard($username){
     
 }
 
+function username_exists($username){
+
+    // Must for function
+    global $connection;
+
+    $username   = escape($username);
+
+    $query = "SELECT username FROM users WHERE username = '$username' ";
+    $username_query = mysqli_query($connection, $query);
+    confirmQuery($username_query);
+  
+    if(mysqli_num_rows($username_query) > 0){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+function email_exists($user_email){
+
+    // Must for function
+    global $connection;
+
+    $user_email = escape($user_email);
+
+    $query = "SELECT user_email FROM users WHERE user_email = '$user_email' ";
+    $user_email_query = mysqli_query($connection, $query);
+    confirmQuery($user_email_query);
+  
+    if(mysqli_num_rows($user_email_query) > 0){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+
+function redirect($location){
+
+    return header("Location: ".$location);
+}
+
+
+function register_user($username, $user_password, $user_email){
+ 
+    // Must for function
+    global $connection;
+
+    //----------------------Encrypting Password---------------------
+    $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)); 
+    //----------------------Encrypting Password---------------------
+
+    // insert values in DB
+    $query = "INSERT INTO users(username, user_email, user_password, user_role, user_date_created) ";
+    $query .= "VALUES ('{$username}', '{$user_email}', '{$hashed_password}', 'subscriber',now() ) ";
+    $add_new_user_query = mysqli_query($connection, $query);
+    confirmQuery($add_new_user_query);
+
+}
+
+function send_mail($to, $from, $subject, $email_message){
+ 
+     // Header
+     $header = "From: ".$from;
+
+
+     if($_SERVER['HTTP_HOST'] !== 'localhost'){
+
+         // send email
+         mail($to,$subject,$email_message, $header);
+
+     }
+
+}
+
+function login_user($username, $user_password){
+
+    // Must for function
+    global $connection;
+
+    // Sanitize data
+    $username = escape($username);
+    $user_password = escape($user_password);
+
+    // Retrieving information from DB
+    $query = "SELECT * FROM users WHERE username = '{$username}' ";
+    $select_user_login_query = mysqli_query($connection, $query);
+
+    if(!$select_user_login_query){
+        die ("QUERY FAILED".mysqli_error($connection));
+    }
+
+    while($row=mysqli_fetch_assoc($select_user_login_query)){
+
+        $db_user_id = $row['user_id'];
+        $db_username = $row['username'];
+        $db_user_password = $row['user_password'];
+        $db_user_firstname = $row['user_firstname'];
+        $db_user_lastname = $row['user_lastname'];
+        $db_user_role = $row['user_role'];
+        
+    }
+
+    //--------------dencrypt the password-----------------------------
+
+    // Left is entered password - right password stored in database
+    // $user_password = crypt($user_password, $db_user_password);
+    //--------------dencrypt the password-----------------------------
+
+    // login check verify function
+    // Redirects user to admin or index depending on role
+    if(isset($db_user_password) && password_verify($user_password, $db_user_password)){ // if username and password matches
+        
+         // setting Session variables
+         $_SESSION['id'] = $db_user_id;
+         $_SESSION['username'] = $db_username;
+         $_SESSION['firstname'] = $db_user_firstname;
+         $_SESSION['lastname'] = $db_user_lastname;
+         $_SESSION['user_role'] = $db_user_role;
+
+        //  Redirects to root and then to the page
+         redirect("/cms/index.php");
+                   
+    }else { // anything else
+            //  Redirects to root and then to the page
+            redirect("/cms/index.php");
+            
+        }
+
+
+
+}
+
 
 
 
