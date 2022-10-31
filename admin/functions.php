@@ -235,13 +235,6 @@ function email_exists($user_email){
 
 }
 
-
-function redirect($location){
-
-    return header("Location: ".$location);
-}
-
-
 function register_user($username, $user_password, $user_email){
  
     // Must for function
@@ -331,6 +324,44 @@ function login_user($username, $user_password){
 
 
 
+}
+
+function ifItIsMethod($method=null){
+
+    if($_SERVER['REQUEST_METHOD'] == $method){
+        return true;
+    }
+
+    return false;
+
+}
+
+function isLoggedIn(){
+
+    if(isset($_SESSION['user_role'])){
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
+
+    if(isLoggedIn()){
+        redirect($redirectLocation);
+    }
+}
+
+
+function redirect($location){
+
+    return header("Location: ".$location);
+    
+    // Exits and does not return anything
+    exit;
 }
 
  
