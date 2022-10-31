@@ -50,8 +50,11 @@
             <!-- Error report for wrong username or password -->
             <p class="text-danger">
                 <?php 
-                    echo $_SESSION['message'];  
-                    $_SESSION['message'] = null;
+                    if(isset($_SESSION['message'])){
+                        echo $_SESSION['message'];
+                        $_SESSION['message'] = null;
+                    };  
+                    
                 ?> 
             </p>
             
