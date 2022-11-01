@@ -2,6 +2,30 @@
 <?php  include "includes/header.php"; ?>
 
 
+<?php 
+
+	checkIfUserIsLoggedInAndRedirect('/cms/admin');
+	
+	
+	if(ifItIsMethod('POST')){
+
+		if(isset($_POST['username']) && isset($_POST['user_password'])){
+
+			login_user($_POST['username'], $_POST['user_password']);
+		}else {
+			redirect('/cms/login.php');
+		}
+
+	}
+
+
+
+
+
+
+?>
+
+
 
 <!-- Navigation -->
 
@@ -38,9 +62,19 @@
 									<div class="form-group">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="glyphicon glyphicon-lock color-blue"></i></span>
-											<input name="password" type="password" class="form-control" placeholder="Enter Password">
+											<input name="user_password" type="password" class="form-control" placeholder="Enter Password">
 										</div>
 									</div>
+
+									<!-- Error report for wrong username or password -->
+									<p class="text-danger">
+										<?php 
+											if(isset($_SESSION['message'])){
+												echo $_SESSION['message'];
+												$_SESSION['message'] = null;
+											};                    
+										?> 
+									</p>
 
 									<div class="form-group">
 

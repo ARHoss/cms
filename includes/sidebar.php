@@ -1,6 +1,23 @@
+<?php 
+
+    if(ifItIsMethod('POST')){
+
+        if(isset($_POST['username']) && isset($_POST['user_password'])){
+
+            login_user($_POST['username'], $_POST['user_password']);
+        }else {
+            redirect('/cms/index.php');
+        }
+
+    }
+
+
+?>
+
+
+
 <!-- Blog Sidebar Widgets Column -->
 <div class="col-md-4">
-
 
 <!-- Blog Search Well -->
 <div class="well">
@@ -32,7 +49,7 @@
 
             <h4>Log In</h4>
             <!-- Login Form -->
-            <form action="login.php" method="post">
+            <form action="" method="post">
             
             <div class="form-group">
                 <input name="username" type="text" class="form-control" placeholder="Enter Username" autocomplete="on">

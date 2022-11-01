@@ -333,14 +333,15 @@ function login_user($username, $user_password){
     }else { // anything else
             //  Redirects to root and then to the page
             $_SESSION['message'] = "Wrong Username or Password";
-            redirect("/cms/index.php");
+            return false;
             
         }
-
+    return true;
 
 
 }
 
+// Catches the post method on the page it is used
 function ifItIsMethod($method=null){
 
     if($_SERVER['REQUEST_METHOD'] == $method){
@@ -375,7 +376,7 @@ function isLoggedOut(){
 
 }
 
-
+// if user is logged in then redirect
 function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
 
     if(isLoggedIn()){
