@@ -2,8 +2,8 @@
 <?php  include "includes/header.php"; ?>
 
 <?php 
-
-    if(!ifItIsMethod('GET') || !$_GET['forgot']){
+    // Need to investigate
+    if(!ifItIsMethod('GET') && !isset($_GET['forgot'])){
         redirect('/cms');
     }
 
@@ -17,6 +17,32 @@
             $length = 50;
             $token = bin2hex(openssl_random_pseudo_bytes($length));
 
+            // Checking for email and creating error_message
+            // Prepare Statements PHP
+            if(email_exists($user_email)){
+
+                // Sets up the connection
+                if($stmt = mysqli_prepare($connection, "UPDATE users SET token='{$token}' WHERE user_email = ?")){
+                    // s stands for sting
+                    mysqli_stmt_bind_param($stmt, 's', $user_email);
+                    // Executes
+                    mysqli_stmt_execute($stmt);
+                    // Close the connection
+                    mysqli_stmt_close($stmt);
+                } 
+                
+                
+                
+                
+                // Query testing 
+                // else {
+                //     echo mysqli_error($connection);
+                // }
+
+
+
+            }
+                
             
 
 
@@ -59,6 +85,10 @@
                                         </div>
 
                                         <input type="hidden" class="hide" name="token" id="token" value="">
+
+                                        <!-- Error report if email already exists -->
+                                        <p class="text-danger"><?php echo error_message() ?></p>
+
                                         
                                     </form>
 

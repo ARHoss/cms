@@ -226,6 +226,7 @@ function username_exists($username){
     if(mysqli_num_rows($username_query) > 0){
         return true;
     }else{
+        $_SESSION['message'] = "Sorry, username does not exist";
         return false;
     }
 
@@ -245,6 +246,7 @@ function email_exists($user_email){
     if(mysqli_num_rows($user_email_query) > 0){
         return true;
     }else{
+        $_SESSION['message'] = "Sorry, email does not exist";
         return false;
     }
 
@@ -398,7 +400,7 @@ function currentPage(){
     return basename($_SERVER['PHP_SELF']);
 }
 
-function login_error_message(){
+function error_message(){
     
     $message = "";
     if(isset($_SESSION['message'])){
