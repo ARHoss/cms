@@ -398,7 +398,17 @@ function currentPage(){
     return basename($_SERVER['PHP_SELF']);
 }
 
- 
+function login_error_message(){
+    
+    $message = "";
+    if(isset($_SESSION['message'])){
+    
+        $message = $_SESSION['message'];
+        $_SESSION['message'] = null;
+        return $message;
+    }
+    return $message;
+}
 
 
 

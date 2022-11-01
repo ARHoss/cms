@@ -65,14 +65,10 @@
                 </span>
             </div>
             <!-- Error report for wrong username or password -->
-            <p class="text-danger">
-                <?php 
-                    if(isset($_SESSION['message'])){
-                        echo $_SESSION['message'];
-                        $_SESSION['message'] = null;
-                    };                    
-                ?> 
-            </p>
+            <p class="text-danger"><?php echo login_error_message() ?></p>
+
+            <!-- Forgot Password -->
+            <div class="form-group"><a href="../forgot_password.php?forgot=<?php  echo uniqid(true); ?>">Forgot Password</a></div>
             
         </form> 
     
