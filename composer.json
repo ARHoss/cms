@@ -1,0 +1,13 @@
+{
+    "name": "raufh/cms",
+    "require-dev": {
+        "phpmailer/phpmailer": "^6.6"
+    },
+    "authors": [
+        {
+            "name": "ARHoss",
+            "email": "rhossaincse@gmail.com"
+        }
+    ],
+    "require": {}
+}

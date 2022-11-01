@@ -91,6 +91,8 @@
 
                                         
                                     </form>
+                                    
+                                    <h3>Please check your email</h3>
 
                                 </div><!-- Body-->
 
