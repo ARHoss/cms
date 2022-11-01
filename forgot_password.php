@@ -1,6 +1,33 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
 
+<?php 
+
+    if(!ifItIsMethod('GET') || !$_GET['forgot']){
+        redirect('/cms');
+    }
+
+    if(ifItIsMethod('POST')){
+        if(isset($_POST['user_email'])){
+
+            $user_email = $_POST['user_email'];
+            $user_email = escape($user_email);
+
+            // Creates random token
+            $length = 50;
+            $token = bin2hex(openssl_random_pseudo_bytes($length));
+
+            
+
+
+
+
+        }
+    }
+
+?>
+
+
 
 <!-- Page Content -->
 <div class="container">
@@ -19,15 +46,12 @@
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
 
-
-
-
                                     <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                                <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                                                <input id="user_email" name="user_email" placeholder="email address" class="form-control"  type="email">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -36,9 +60,6 @@
 
                                         <input type="hidden" class="hide" name="token" id="token" value="">
                                         
-                                        <!-- Forgot Password -->
-                                        <div class="form-group"><a href="forgot_password.php?forgot=<?php  echo uniqid(true); ?>">Forgot Password</a></div>
-
                                     </form>
 
                                 </div><!-- Body-->

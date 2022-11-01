@@ -69,6 +69,9 @@
 									<!-- Error report for wrong username or password -->
 									<p class="text-danger"><?php echo login_error_message() ?></p>
 
+									<!-- Forgot Password -->
+									<div class="form-group"><a href="forgot_password.php?forgot=<?php  echo uniqid(true); ?>">Forgot Password</a></div>
+
 									<div class="form-group">
 
 										<input name="login" class="btn btn-lg btn-primary btn-block" value="Login" type="submit">
