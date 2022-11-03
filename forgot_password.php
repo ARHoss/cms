@@ -89,13 +89,6 @@
                     $email_sent = false;
                 }                                          
 
-                
-                
-                
-                
-
-
-
             }
                 
         }

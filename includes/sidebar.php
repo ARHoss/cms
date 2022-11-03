@@ -2,12 +2,18 @@
 
     if(ifItIsMethod('POST')){
 
-        if(isset($_POST['username']) && isset($_POST['user_password'])){
+        if(isset($_POST['login'])){
 
-            login_user($_POST['username'], $_POST['user_password']);
-        }else {
-            redirect('/cms/index.php');
+            if(isset($_POST['username']) && isset($_POST['user_password'])){
+
+                login_user($_POST['username'], $_POST['user_password']);
+            }else {
+                redirect('/cms/index.php');
+            }
+
+
         }
+
 
     }
 

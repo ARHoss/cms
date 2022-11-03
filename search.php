@@ -37,8 +37,11 @@
                 if($count == 0){
                     echo "<h1>NO RESULT</h1>";
                 }else{
-            // Searches for post_tags ends here
+                    // Searches for post_tags ends here
                      
+                    echo "<h1 class='page-header'>CMS<small>Welcome</small></h1>";
+                    echo "<h2 class='page-header'>Search Result for $search </h2>";
+                    
                     // Displays the search results sames index .php
                     while($row = mysqli_fetch_assoc($search_query)){
                         
@@ -47,18 +50,14 @@
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];
+                        $post_tags = $row['post_tags'];
     
                     ?>
     
-                    <h1 class="page-header">
-                        CMS
-                        <small>Welcome</small>
-                    </h1>
-    
                     <!-- First Blog Post -->
-                    <h2>
+                    <h3>
                         <a href="#"><?php echo $post_title;?></a>
-                    </h2>
+                    </h3>
                     <p class="lead">
                         by <a href="index.php"><?php echo $post_author;?></a>
                     </p>

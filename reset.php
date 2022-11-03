@@ -1,9 +1,6 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
 
-<!-- Navigation -->
-<?php include "includes/navigation.php";?>
-
 
 
 <?php 
@@ -11,7 +8,6 @@
     if(!isset($_GET['email']) && !isset($_GET['token'])){
         redirect('/cms');
     }
-
 
     $user_email = $_GET['email'];
     $user_email = escape($user_email);
@@ -39,7 +35,7 @@
 
         // Redirecting user if token or email does not match
         if($token !== $DBtoken || $user_email !== $DBuser_email){
-            redirect('/cms');
+            redirect('/cms/login.php');
         }
     }
 
@@ -47,7 +43,7 @@
     // Seting up the password using POST and prepared statement
 
     if(ifItIsMethod('POST')){
-        if(isset($_POST['user_password']) && isset($_POST['user_password_verify'])){
+        if(!empty($_POST['user_password']) && !empty($_POST['user_password_verify'])){
             if($_POST['user_password'] === $_POST['user_password_verify']){
 
                 $user_password = $_POST['user_password'];
@@ -65,7 +61,8 @@
 
                     // check result
                     if(mysqli_stmt_affected_rows($stmt) >= 1){
-                        echo "Success";
+                        
+                        redirect('/cms/login.php');
                     }
 
                     // Close the connection
@@ -76,10 +73,10 @@
 
 
             }else{
-                echo "Password do not match";
+                $_SESSION['message'] = "Password do not match";
             }
         }else{
-            echo "Fields cannot be empty";
+            $_SESSION['message'] = "Fields cannot be empty";
         }
     }
 
@@ -87,54 +84,60 @@
 
 ?>
 
+<!-- Navigation -->
+<?php include "includes/navigation.php";?>
 
 <!-- Page Content -->
 <div class="container">
 
-    <div class="form-gap"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="text-center">
 
-                                <h3><i class="fa fa-lock fa-4x"></i></h3>
-                                <h2 class="text-center">Password Reset</h2>
-                                <p>You can enter your new password here.</p>
-                                <div class="panel-body">
+        <div class="form-gap"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="text-center">
+                                
+                                    <h3><i class="fa fa-lock fa-4x"></i></h3>
+                                    <h2 class="text-center">Password Reset</h2>
+                                    <p>You can enter your new password here.</p>
+                                    <div class="panel-body">
 
-                                    <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                                        <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input id="user_password" name="user_password" placeholder="enter new password" class="form-control"  type="password">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                    <input id="user_password" name="user_password" placeholder="enter new password" class="form-control"  type="password">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
-                                                <input id="user_password_verify" name="user_password_verify" placeholder="retype password" class="form-control"  type="password">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
+                                                    <input id="user_password_verify" name="user_password_verify" placeholder="retype password" class="form-control"  type="password">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
-                                        </div>
+                                            <div class="form-group">
+                                                <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                            </div>
 
-                                        <input type="hidden" class="hide" name="token" id="token" value="">
-                                    </form>
+                                            <input type="hidden" class="hide" name="token" id="token" value="">
 
-                                </div><!-- Body-->
+                                                                                    <!-- Error report if email already exists -->
+                                            <p class="text-danger"><?php echo error_message() ?></p>
+                                        </form>
+
+                                    </div><!-- Body-->
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
     <hr>
