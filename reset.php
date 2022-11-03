@@ -50,7 +50,29 @@
         if(isset($_POST['user_password']) && isset($_POST['user_password_verify'])){
             if($_POST['user_password'] === $_POST['user_password_verify']){
 
-                echo   "Success";
+                $user_password = $_POST['user_password'];
+                $user_password = escape($user_password);
+
+                //----------------------Encrypting Password---------------------
+                $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+
+                // Sets up the connection and updates value
+                if($stmt = mysqli_prepare($connection, "UPDATE users SET token='', user_password='{$hashed_password}' WHERE token = ?")){
+                    // s stands for sting
+                    mysqli_stmt_bind_param($stmt, 's', $token);
+                    // Executes
+                    mysqli_stmt_execute($stmt);
+
+                    // check result
+                    if(mysqli_stmt_affected_rows($stmt) >= 1){
+                        echo "Success";
+                    }
+
+                    // Close the connection
+                    mysqli_stmt_close($stmt);
+                }else {
+                    echo "Bad Query";
+                }
 
 
             }else{

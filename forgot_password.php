@@ -30,7 +30,7 @@
             //-----------------------Prepare Statements INSERT PHP-----------------------//
             if(email_exists($user_email)){
 
-                // Sets up the connection
+                // Sets up the connection and updates value
                 if($stmt = mysqli_prepare($connection, "UPDATE users SET token='{$token}' WHERE user_email = ?")){
                     // s stands for sting
                     mysqli_stmt_bind_param($stmt, 's', $user_email);
