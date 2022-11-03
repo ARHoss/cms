@@ -8,7 +8,6 @@
 
 <!-- PHP MAiler Configurations -->
 <?php  include "./vendor/autoload.php"; ?>              <!-- Autoloads all the classes for PHP Mailer -->
-<?php  include "./classes/config.php"; ?>               <!-- PHP Mailer Custom Classes -->
 
 <?php 
     // Need to investigate
@@ -64,6 +63,7 @@
                 
                 $mail->Port       = Config::SMTP_PORT;                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                 $mail->isHTML(true);                                         //Set email format to HTML
+                $mail->CharSet = 'UTF-8';                                    //Sets up characters for different languages
 
                 //Recipients
                 $mail->setFrom('edwin@edwindiaz.com', 'Mailer');
