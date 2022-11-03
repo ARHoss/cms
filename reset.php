@@ -13,6 +13,55 @@
     }
 
 
+    $user_email = $_GET['email'];
+    $user_email = escape($user_email);
+
+    $token = $_GET['token'];
+    $token = escape($token);
+
+
+    //-----------------------Prepare Statements SELECT PHP-----------------------//
+    // Sets up the connection and compares the token in the database
+    if($stmt = mysqli_prepare($connection, "SELECT username, user_email, token FROM users WHERE token = ?")){
+        // s stands for sting
+        mysqli_stmt_bind_param($stmt, 's', $token);
+        // Executes
+        mysqli_stmt_execute($stmt);
+
+        // bind the results
+        mysqli_stmt_bind_result($stmt, $DBusername, $DBuser_email, $DBtoken);
+
+        // fetch
+        mysqli_stmt_fetch($stmt);
+
+        // Close the connection
+        mysqli_stmt_close($stmt);
+
+        // Redirecting user if token or email does not match
+        if($token !== $DBtoken || $user_email !== $DBuser_email){
+            redirect('/cms');
+        }
+    }
+
+
+    // Seting up the password using POST and prepared statement
+
+    if(ifItIsMethod('POST')){
+        if(isset($_POST['user_password']) && isset($_POST['user_password_verify'])){
+            if($_POST['user_password'] === $_POST['user_password_verify']){
+
+                echo   "Success";
+
+
+            }else{
+                echo "Password do not match";
+            }
+        }else{
+            echo "Fields cannot be empty";
+        }
+    }
+
+
 
 ?>
 

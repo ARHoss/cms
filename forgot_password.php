@@ -27,7 +27,7 @@
             $token = bin2hex(openssl_random_pseudo_bytes($length));
 
             // Checking for email and creating error_message
-            //-----------------------Prepare Statements PHP-----------------------//
+            //-----------------------Prepare Statements INSERT PHP-----------------------//
             if(email_exists($user_email)){
 
                 // Sets up the connection
@@ -74,6 +74,7 @@
                 $mail->Subject = 'Reset Password for CMS';
                 
                 // Sends link with the user's email and unique token
+                // Needs to be changed to reflect site
                 $mail->Body    = "<p>
                 
                 <a href='http://localhost/cms/reset.php?email=$user_email&token=$token'>Please click to reset password</a>      
