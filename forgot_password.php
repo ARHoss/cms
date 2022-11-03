@@ -10,8 +10,8 @@
 <?php  include "./vendor/autoload.php"; ?>              <!-- Autoloads all the classes for PHP Mailer -->
 
 <?php 
-    // Need to investigate
-    if(!ifItIsMethod('GET') && !isset($_GET['forgot'])){
+    // Redirects if it is not get method or forgot variable not set
+    if(!ifItIsMethod('GET') || !isset($_GET['forgot'])){
         redirect('/cms');
     }
 
@@ -21,7 +21,7 @@
             $user_email = $_POST['user_email'];
             $user_email = escape($user_email);
 
-            // Creates random token
+            // Creates random token to insert in DB and send through email
             $length = 50;
             $token = bin2hex(openssl_random_pseudo_bytes($length));
 
@@ -70,8 +70,15 @@
                 $mail->addAddress($user_email);     //Add a recipient //Name is optional          
                 
                 // Content
-                $mail->Subject = 'Here is the subject';
-                $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                $mail->Subject = 'Reset Password for CMS';
+                
+                // Sends link with the user's email and unique token
+                $mail->Body    = "<p>
+                
+                <a href='http://localhost/cms/reset.php?email=$user_email&token=$token'>Please click to reset password</a>      
+
+                </p>";
+                
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 if($mail->send()){                                          // Send Email

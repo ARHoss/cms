@@ -67,7 +67,7 @@
             <!-- Error report for wrong username or password -->
             <p class="text-danger"><?php echo error_message() ?></p>
 
-            <!-- Forgot Password -->
+            <!-- Forgot Password Uses get and creates unique token variable-->
             <div class="form-group"><a href="forgot_password.php?forgot=<?php  echo uniqid(true); ?>">Forgot Password</a></div>
             
         </form> 

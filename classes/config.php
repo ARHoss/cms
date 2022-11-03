@@ -1,5 +1,6 @@
 <?php 
 
+// Keeps all our configuration for sending email
 class Config {
 
 
