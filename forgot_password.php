@@ -11,7 +11,8 @@
 
 <?php 
     // Redirects if it is not get method or forgot variable not set
-    if(!ifItIsMethod('GET') || !isset($_GET['forgot'])){
+    // Needs refactoring
+    if(!isset($_GET['forgot'])){
         redirect('/cms');
     }
 
@@ -82,9 +83,9 @@
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 if($mail->send()){                                          // Send Email
-                    echo 'Message has been sent';
+                    $email_sent = true;
                 }else {
-                    echo "Message was not sent";
+                    $email_sent = false;
                 }                                          
 
                 
@@ -114,12 +115,12 @@
                     <div class="panel-body">
                         <div class="text-center">
 
-
+                                <?php if(!isset($email_sent)):?>
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                                 <h2 class="text-center">Forgot Password?</h2>
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
-
+                                    
                                     <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
                                         <div class="form-group">
@@ -139,8 +140,10 @@
 
                                         
                                     </form>
-                                    
+                                <?php else:  ?>                                    
                                     <h3>Please check your email</h3>
+
+                                <?php endif;  ?>
 
                                 </div><!-- Body-->
 
