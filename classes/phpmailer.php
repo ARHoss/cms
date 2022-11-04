@@ -24,7 +24,7 @@ class Mailer{
             $mail = new PHPMailer(true);                                //Create an instance; passing `true` enables exceptions               
 
 
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             
             $mail->isSMTP();                                             //Send using SMTP
             $mail->Host       = Config::SMTP_HOST;                       //Set the SMTP server to send through
