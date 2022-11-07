@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CMS Home</a>
+                <a class="navbar-brand" href="/cms">CMS Home</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,16 +71,9 @@
                             
                         } 
                         
+                                                
                         
-                        
-                        
-                        // if($pageName == $registration) {
-                        //     $registration_class = 'active';
-                        // }else if ($pageName == $contact){
-                        //     $contact_class = 'active';
-                        // }
-                        
-                        echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
+                        echo "<li class='$category_class'><a href='/cms/category/{$cat_id}'>{$cat_title}</a></li>";
                         
                     }
         
@@ -91,7 +84,7 @@
                             // Only subscriber are not allowed to have this tab
                             if(isLoggedIn()){
                                 if(isAdminUser() || isStandardUser()){
-                                    echo "<a href='admin'>Admin</a>";
+                                    echo "<a href='/cms/admin'>Admin</a>";
                                 }
                             }
                         
@@ -116,13 +109,13 @@
                     </li>
 
                     <!-- Link for registration -->
-                    <?php if(isLoggedOut()){echo "<li class='$registration_class'><a href=registration.php>Registration</a></li>";} ?>
+                    <?php if(isLoggedOut()){echo "<li class='$registration_class'><a href=/cms/registration>Registration</a></li>";} ?>
 
                     <!-- Link for contact -->
-                    <li class="<?php echo $contact_class;?>" ><a href="contact.php">Contact</a></li>
+                    <li class="<?php echo $contact_class;?>" ><a href="/cms/contact">Contact</a></li>
                                                     
                     <!-- Link for login -->
-                    <?php if(isLoggedOut()){echo "<li class='$login_class'><a href=login.php>Login</a></li>";} ?>
+                    <?php if(isLoggedOut()){echo "<li class='$login_class'><a href=/cms/login>Login</a></li>";} ?>
                                                                  
 
                 </ul>

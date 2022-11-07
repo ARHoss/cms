@@ -79,7 +79,8 @@
                     <!-- First Blog Post -->
                     <h2>
                         <!-- Sending post_id to post.php -->
-                        <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_title;?></a>
+                        <!-- For pretty url - you can use post/ -->
+                        <a href="post/<?php echo $post_id;?>"><?php echo $post_title;?></a>
                     
                     </h2>
                     <p class="lead">
@@ -89,7 +90,7 @@
                     <hr>
                     
                     <!-- Sending post_id to post.php -->
-                    <a href="post.php?p_id=<?php echo $post_id;?>"><img class="img-responsive" src="images/<?php echo $post_image;?>" alt=""></a>
+                    <a href="post/<?php echo $post_id;?>"><img class="img-responsive" src="images/<?php echo $post_image;?>" alt=""></a>
                     
                     <hr>
                     <p><?php echo $post_content;?></p>
